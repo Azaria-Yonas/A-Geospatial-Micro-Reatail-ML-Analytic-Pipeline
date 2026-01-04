@@ -1,0 +1,4 @@
+CREATE TABLE zcta(
+    Index_num BIGSERIAL NOT NULL,
+    zcta INT PRIMARY KEY
+)

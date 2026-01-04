@@ -1,19 +1,19 @@
 import psycopg
 
 
-def insertIntoLocations (zip,coor, dbname, username, password):
+def insertIntoLocations (zcta,bbox, dbname, username, password):
     with psycopg.connect(f" dbname={dbname} user={username} password = {password}") as conn:
         with conn.cursor() as cur:
-            if coor is (None): 
+            if bbox is (None): 
                 cur.execute(f"""
-                    INSERT INTO locations({zip})
-                    VALUES (%s)
-                """,
-                (zip))
-            else:
-                cur.execute(f"""
-                    INSERT INTO locations(zip, down_lat, left_long, up_lat, right_long)
+                    INSERT INTO locations(zcta, down_lat, left_long, up_lat, right_long)
                     VALUES (%s, %s, %s, %s, %s);
                 """,
-                (zip, coor[0], coor[1], coor[2], coor[3]))  
+                (zcta, 0 , 0 , 0 , 0))
+            else:
+                cur.execute(f"""
+                    INSERT INTO locations(zcta, down_lat, left_long, up_lat, right_long)
+                    VALUES (%s, %s, %s, %s, %s);
+                """,
+                (zcta, bbox[0], bbox[1], bbox[2], bbox[3]))  
              

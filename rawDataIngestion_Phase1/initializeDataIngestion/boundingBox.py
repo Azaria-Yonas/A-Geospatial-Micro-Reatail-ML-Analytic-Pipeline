@@ -26,6 +26,6 @@ def find_bbox(data):
 
 
 
-# I found an api, TIGERWeb, that returns coordinates that map zip codes. It 
+# I found an api, TIGERWeb, that returns coordinates that map zcta. It 
 # returns a JSON contaning logitude-latitude pairs. However, to my inconvience,
-# zip codes
+# zcta
