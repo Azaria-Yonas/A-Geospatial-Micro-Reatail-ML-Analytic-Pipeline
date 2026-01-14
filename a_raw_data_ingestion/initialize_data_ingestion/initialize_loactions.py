@@ -2,7 +2,7 @@ import asyncio
 import aiohttp
 
 
-from rawDataIngestion_Stage1.initializeDataIngestion.bounding_box import find_bbox
+from a_raw_data_ingestion.initialize_data_ingestion.bounding_box import find_bbox
 from psql.locations import insert_location
 from psql.zip_code_tabulation_area import get_zcta
 
@@ -12,7 +12,9 @@ url = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TA
 
 
 
-zcta = get_zcta()
+zcta = get_zcta(lbound=30)
+
+
 
 async def get_tasks (session, z):
     async with session.get(url.format(z), ssl=False) as session:

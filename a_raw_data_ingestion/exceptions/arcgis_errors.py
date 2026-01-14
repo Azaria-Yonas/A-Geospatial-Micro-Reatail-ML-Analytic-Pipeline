@@ -7,6 +7,12 @@ class ArcGISError (APIError):
         self.response = resonse
 
 
-    def false200 (self):
-        if self.response[0] == 'error'
-            return
+class False200 (ArcGISError):
+    
+        
+
+
+
+def validate_argis():
+    pass
+    

@@ -11,11 +11,10 @@ from arcgis import arcgis_tasks       ### You need to find a way to filter error
                                       ### And I need to end the event loop if I get a 400 error
 
 
-
+coordinates = get_coordinates()
 
 
 async def ingest_data():
-    coordinates = get_coordinates()
     async with aiohttp.ClientSession() as session:
         places = [places_tasks(session, coordinate) for  coordinate in coordinates] 
         overpass = [overpass_tasks(session, coordinate) for  coordinate in coordinates] 
