@@ -12,17 +12,18 @@ def get_zcta (lbound = None, ubound = None):
                     SELECT zcta FROM zcta
                 """)
             elif ubound is None and lbound is not None: 
-                curr.execute(f"""
-                    SELECT zcta FROM zcta OFFSET {lbound} 
-                """)
+                curr.execute(
+                    "SELECT zcta FROM zcta OFFSET %s",
+                    (lbound,))
             elif lbound is None and ubound is not None:
-                curr.execute(f"""
-                    SELECT zcta FROM zcta FIRST {ubound} ROWS ONLY
-                """)        
+                curr.execute(
+                    "SELECT zcta FROM zcta FIRST %s ROWS ONLY", 
+                    (ubound,))        
             else:
-                curr.execute(f"""
-                    SELECT zcta FROM zcta OFFSET {lbound} FETCH FIRST {ubound - lbound} ROWS ONLY
-                """)
+                curr.execute(
+                    "SELECT zcta FROM zcta OFFSET %s FETCH FIRST %s ROWS ONLY",
+                    (lbound, ubound - lbound if ubound and lbound is not None else None)
+                )
             for (z,) in curr: 
                 zcta.append(z)  
     return zcta 

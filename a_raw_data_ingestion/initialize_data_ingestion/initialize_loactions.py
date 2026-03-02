@@ -12,7 +12,7 @@ url = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TA
 
 
 
-zcta = get_zcta(lbound=30)
+zcta = get_zcta()
 
 
 
@@ -31,7 +31,8 @@ async def initialize_table():
             insert_location(z, bbox)
 
 
-asyncio.run(initialize_table())
+if __name__ == "__main__":
+    asyncio.run(initialize_table())
 
 
 
