@@ -21,10 +21,15 @@ def get_header (key):
 
 def get_body(coor):
     lat, long, radius = coor
+
+    lat = float(lat)
+    long = float(long)
+    radius = float (radius)
+
     radius = int(round(radius))
     body = {
         "insights": ["INSIGHT_COUNT"],
-        "filter": {
+        "filter": { 
             "locationFilter": {
                 "circle": {
                     "radius": 1409,
@@ -66,41 +71,48 @@ def get_body(coor):
 
 async def places_tasks(session, coordinate):
     body = get_body(coordinate[2])
-    async with session.post(url=URL, headers=get_header("API_KEY"), json=body) as resp:
+    async with session.post(url=URL, headers=get_header(API_KEY), json=body) as resp:
         status = resp.status
         try: 
             response = await resp.json()        
-            insert_request(coordinate[0], "places", URL, "POST", headers=get_header("API_KEY"), body=body, status_code=status) 
+            insert_request(coordinate[0], "places", URL, "POST", headers=get_header(API_KEY), body=body, status_code=status) 
         except aiohttp.ContentTypeError:
             response = await resp.text() 
-            insert_request(coordinate[0], "places", URL, "POST", headers=get_header("API_KEY"), body=body, status_code=status, error_message=response ) 
-        return coordinate[0], response, status
+            insert_request(coordinate[0], "places", URL, "POST", headers=get_header(API_KEY), body=body, status_code=status, error_message=response ) 
+        return coordinate[0], response, status, "places"
 
 
 
 
 
-                            ###########################################
-                            ###                                     ###
-                            ###  This here is to test individually  ###
-                            ###                                     ###
-                            ###########################################
 
 
-async def func(coordinate):
-    async with aiohttp.ClientSession() as session:
-        tasks = [places_tasks(session,  coordinate)]
-        results = await asyncio.gather(*tasks)
-        for z ,r, s in results:
-            if s == 200:
-                insert_response(z, "places", r)
-            else:
-                print(r) 
+
+
+
+
+
+##########################################
+##                                     ###
+##  This here is to test individually  ###
+##                                     ###
+##########################################
+
+
+# async def func(coordinate):
+#     async with aiohttp.ClientSession() as session:
+#         tasks = [places_tasks(session,  coordinate)]
+#         results = await asyncio.gather(*tasks)
+#         for z ,r, s, n in results:
+#             if s == 200:
+#                 insert_response(z, "places", r)
+#             else:
+#                 print(r) 
 
             
-coordinates = ( 98102, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
+# coordinates = ( 98102, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
 
-asyncio.run(func(coordinates))
+# asyncio.run(func(coordinates))
 
 
 

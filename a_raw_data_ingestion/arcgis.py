@@ -13,8 +13,6 @@ API_KEY = os.getenv("ArcGIS")
 
 
 
-
-
 def get_body(zcta):
     return {
         "f": "json",
@@ -45,7 +43,14 @@ async def arcgis_tasks(session,zcta):
         except aiohttp.ContentTypeError:
             response = await resp.text() 
             insert_request(zcta, "arcgis", URL, "POST", body=body, status_code=status, error_message=response ) 
-        return zcta, response, status
+        return zcta, response, status, "arcgis"
+
+
+
+
+
+
+
 
 
 
@@ -58,15 +63,15 @@ async def arcgis_tasks(session,zcta):
 ###########################################
 
 
-async def func(coordinate):
-    async with aiohttp.ClientSession() as session:
-        tasks = [arcgis_tasks(session,  coordinate[0])]
-        results = await asyncio.gather(*tasks)
-        for z ,r, s in results:
-            if s == 200:
-                insert_response(z, "arcgis", r)  
+# async def func(coordinate):
+#     async with aiohttp.ClientSession() as session:
+#         tasks = [arcgis_tasks(session,  coordinate[0])]
+#         results = await asyncio.gather(*tasks)
+#         for z ,r, s in results:
+#             if s == 200:
+#                 insert_response(z, "arcgis", r)  
 
 
-coordinates = ( 98103, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
+# coordinates = ( 98103, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
 
-asyncio.run(func(coordinates))
+# asyncio.run(func(coordinates))

@@ -4,7 +4,7 @@ CREATE TABLE responses(
 
     zcta INT REFERENCES zcta(zcta),
 
-    api VARCHAR(50),
+    api VARCHAR(8) NOT NULL CHECK (api IN ('places','overpass','arcgis','census')),
     response JSONB,
     date_time TIMESTAMPTZ DEFAULT now()
 );

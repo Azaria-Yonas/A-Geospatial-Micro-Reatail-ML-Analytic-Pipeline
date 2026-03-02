@@ -39,7 +39,7 @@ def get_coordinates(lbound=None, hbound=None):
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
                     FROM locations
-                    OFFSET {lbound} FETCH FIRST {hbound-lbound} ROWS ONLY    
+                    OFFSET %s FETCH FIRST %s ROWS ONLY    
                 """, (lbound, hbound - lbound if hbound and lbound is not None else 0))
             for coordinate in curr:
                 coordinates.append(coordinate)
