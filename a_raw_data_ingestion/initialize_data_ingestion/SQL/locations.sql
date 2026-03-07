@@ -16,7 +16,7 @@ CREATE TABLE locations (
         )
     ) STORED
     
-)
+);
 
 
 CREATE INDEX locations_city_index ON locations (city);
