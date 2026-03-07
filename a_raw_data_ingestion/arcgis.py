@@ -70,7 +70,7 @@ async def func(coordinate):
         results = await asyncio.gather(*tasks)
         for z ,r, s, n in results:
             if s == 200:
-                insert_response(z, "arcgis", r)  
+                insert_response(z, city, "arcgis", r)  
 
 
 coordinates = ( 98103, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))

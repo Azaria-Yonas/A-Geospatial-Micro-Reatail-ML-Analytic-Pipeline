@@ -48,5 +48,5 @@ def get_coordinates(lbound=None, hbound=None):
                 (CITY, lbound, hbound - lbound if hbound and lbound is not None else 0))
             for coordinate in curr:
                 coordinates.append(coordinate)
-    return coordinates
+    return coordinates, CITY
 

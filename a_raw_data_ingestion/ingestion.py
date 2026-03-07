@@ -11,7 +11,7 @@ from psql.responses import insert_response
 
 
 
-coordinates = get_coordinates(lbound=0, hbound=10)
+coordinates, city = get_coordinates(lbound=0, hbound=10)
 
 
 
@@ -39,7 +39,7 @@ for i in range(len(coordinates)):
 #             z, r, s, n = result
 
 #             if s == 200:
-#                 insert_response(z, n, r)
+#                 insert_response(z, city, n, r)
 
 
 
