@@ -13,3 +13,4 @@ CREATE TABLE responses(
 
 CREATE INDEX responses_zcta_and_api ON responses(zcta, api);
 CREATE INDEX responses_date_time ON responses(date_time);
+CREATE INDEX responses_city_idx ON responses(city);
