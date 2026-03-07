@@ -1,5 +1,5 @@
 import psycopg
-from . import DB_NAME, USERNAME, DB_KEY
+from . import DB_NAME, USERNAME, DB_KEY, CITY
 
 def get_zcta (lbound = None, ubound = None):
     zcta= []
@@ -9,21 +9,28 @@ def get_zcta (lbound = None, ubound = None):
 
             if ubound is None and lbound is  None:
                 curr.execute("""
-                    SELECT zcta, city FROM zcta
-                """)
+                    SELECT zcta FROM zcta
+                    WHERE city = %s""",
+                    (CITY,))
             elif ubound is None and lbound is not None: 
-                curr.execute(
-                    "SELECT zcta, city FROM zcta OFFSET %s",
-                    (lbound,))
+                curr.execute("""
+                    SELECT zcta FROM zcta
+                    WHERE city = %s
+                    OFFSET %s""",
+                    (CITY, lbound))
             elif lbound is None and ubound is not None:
-                curr.execute(
-                    "SELECT zcta, city FROM zcta FIRST %s ROWS ONLY", 
-                    (ubound,))        
+                curr.execute("""
+                    SELECT zcta FROM zcta
+                    WHERE city = %s
+                    FIRST %s ROWS ONLY""", 
+                    (CITY, ubound))        
             else:
-                curr.execute(
-                    "SELECT zcta, city FROM zcta OFFSET %s FETCH FIRST %s ROWS ONLY",
-                    (lbound, ubound - lbound if ubound and lbound is not None else 0)
+                curr.execute("""
+                    SELECT zcta FROM zcta
+                    WHERE city = %s
+                    OFFSET %s FETCH FIRST %s ROWS ONLY""",
+                    (CITY, lbound, ubound - lbound if ubound and lbound is not None else 0)
                 )
             for (z,) in curr: 
                 zcta.append(z)  
-    return zcta 
+    return zcta, CITY 
