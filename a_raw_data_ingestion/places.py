@@ -42,16 +42,16 @@ def get_body(coor):
                 "typeFilter": {
                     "includedTypes": [
                         "barber_shop",
-                        "nail_salon",
-                        "tailor",
-                        "bagel_shop",
-                        "donut_shop",
-                        "ice_cream_shop",
-                        "juice_shop",
-                        "tea_house",
-                        "candy_store",
-                        "butcher_shop",
-                        "asian_grocery_store", 
+                        # "nail_salon",
+                        # "tailor",
+                        # "bagel_shop",
+                        # "donut_shop",
+                        # "ice_cream_shop",
+                        # "juice_shop",
+                        # "tea_house",
+                        # "candy_store",
+                        # "butcher_shop",
+                        # "asian_grocery_store", 
                     ]
                 },
             "operatingStatus": [
@@ -66,7 +66,7 @@ def get_body(coor):
     return body
 
 
-
+ 
 
 
 async def places_tasks(session, coordinate):

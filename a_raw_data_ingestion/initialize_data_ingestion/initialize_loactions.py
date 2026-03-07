@@ -13,7 +13,7 @@ url = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TA
 
 
 zcta, city = get_zcta()
-
+ 
 
 async def get_tasks (session, z):
     async with session.get(url.format(z), ssl=False) as session:

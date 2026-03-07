@@ -22,3 +22,4 @@ CREATE TABLE requests(
 CREATE INDEX requests_zcta_and_api ON requests(zcta, api);
 CREATE INDEX requests_status_code ON requests(status_code);
 CREATE INDEX requests_date_time ON requests(date_time);
+ 

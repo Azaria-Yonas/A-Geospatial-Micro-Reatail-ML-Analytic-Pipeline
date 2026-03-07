@@ -64,6 +64,7 @@ async def arcgis_tasks(session,zcta):
 ###########################################
 
 
+
 # async def func(coordinate):
 #     async with aiohttp.ClientSession() as session:
 #         tasks = [arcgis_tasks(session,  coordinate[0])]
