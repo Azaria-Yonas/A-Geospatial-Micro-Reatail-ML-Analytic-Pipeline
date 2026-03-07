@@ -35,7 +35,9 @@ def get_parameter(zcta):
             "B08013_001E",   # The aggregate commute minutes
 
             "B08201_002E",   # The number of households with no vehicle 
-            "B25003_003E",   # The number of renter-occupied households
+            "B25003_003E",   # The number of renter-occupied housing units
+            "B25003_002E",   # The number of owner-occupied housing units
+            "B25003_001E",   # The number of total occupied housing units
 
             "B01001_011E",   # The number of males 25–29
             "B01001_012E",   # The number of males 30–34
@@ -88,7 +90,7 @@ async def census_tasks (session, zcta):
 #     async with aiohttp.ClientSession() as session:
 #         tasks = [census_tasks(session, coordinate[0])]
 #         result = await asyncio.gather(*tasks)
-#         for z, r, s in result:
+#         for z, r, s, n in result:
 #             print(f"{s}->{z}:  {r}")
 
 

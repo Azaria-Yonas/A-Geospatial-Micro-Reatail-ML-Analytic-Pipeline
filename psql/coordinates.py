@@ -1,5 +1,5 @@
 import psycopg
-from . import DB_NAME, USERNAME, DB_KEY
+from . import DB_NAME, USERNAME, DB_KEY, CITY
 
 
 
@@ -14,24 +14,28 @@ def get_coordinates(lbound=None, hbound=None):
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
                     FROM locations
-                """)
+                    WHERE city = %s""",
+                (CITY,))
             elif lbound is not None and hbound is None:
                 curr.execute("""
                     SELECT
                         zcta,
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
-                    FROM locations OFFSET %s""",
-                    (lbound,))
+                    FROM locations 
+                    WHERE city = %s
+                    OFFSET %s""",
+                    (CITY, lbound))
             elif lbound is None and hbound is not None:
                 curr.execute("""
                     SELECT
                         zcta,
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
-                    FROM locations                    
+                    FROM locations 
+                    WHERE city = %s                   
                     FETCH FIRST %s ROWS ONLY """,
-                    (hbound,))
+                    (CITY, hbound))
             else:
                 curr.execute("""
                     SELECT
@@ -39,8 +43,9 @@ def get_coordinates(lbound=None, hbound=None):
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
                     FROM locations
-                    OFFSET %s FETCH FIRST %s ROWS ONLY    
-                """, (lbound, hbound - lbound if hbound and lbound is not None else 0))
+                    WHERE city = %s
+                    OFFSET %s FETCH FIRST %s ROWS ONLY""", 
+                (CITY, lbound, hbound - lbound if hbound and lbound is not None else 0))
             for coordinate in curr:
                 coordinates.append(coordinate)
     return coordinates

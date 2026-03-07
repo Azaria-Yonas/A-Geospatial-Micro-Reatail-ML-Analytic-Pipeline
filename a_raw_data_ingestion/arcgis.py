@@ -24,8 +24,9 @@ def get_body(zcta):
         }]),
         "analysisVariables": ",".join([
             "DaytimePopulation.DPOP_CY",
-            "X1130_X",
-            "IND7225_X"
+            "businesses.N04_BUS",   # businesses with 1–4 employees
+            "businesses.N05_BUS",   # businesses with 5–9 employees
+            "urbanicity.URBNAME"    # City classification
         ]),
         "returnGeometry": "false"
     }
@@ -63,15 +64,15 @@ async def arcgis_tasks(session,zcta):
 ###########################################
 
 
-# async def func(coordinate):
-#     async with aiohttp.ClientSession() as session:
-#         tasks = [arcgis_tasks(session,  coordinate[0])]
-#         results = await asyncio.gather(*tasks)
-#         for z ,r, s in results:
-#             if s == 200:
-#                 insert_response(z, "arcgis", r)  
+async def func(coordinate):
+    async with aiohttp.ClientSession() as session:
+        tasks = [arcgis_tasks(session,  coordinate[0])]
+        results = await asyncio.gather(*tasks)
+        for z ,r, s, n in results:
+            if s == 200:
+                insert_response(z, "arcgis", r)  
 
 
-# coordinates = ( 98103, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
+coordinates = ( 98103, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
 
-# asyncio.run(func(coordinates))
+asyncio.run(func(coordinates))

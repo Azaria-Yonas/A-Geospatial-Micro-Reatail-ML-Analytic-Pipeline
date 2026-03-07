@@ -2,6 +2,7 @@ CREATE TABLE locations (
     index_num BIGSERIAL NOT NULL,
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     zcta INT UNIQUE REFERENCES zcta(zcta),
+    city VARCHAR(30),
     down_lat FLOAT,
     left_long FLOAT,
     up_lat FLOAT,
@@ -18,7 +19,5 @@ CREATE TABLE locations (
 )
 
 
+CREATE INDEX locations_city_index ON locations (city);
 
-
--- I Primarily created this table to store information used to make the API requests
--- I originally used radius.py to calculate the radius and I have left more information as to why 
