@@ -9,20 +9,20 @@ def get_zcta (lbound = None, ubound = None):
 
             if ubound is None and lbound is  None:
                 curr.execute("""
-                    SELECT zcta FROM zcta
+                    SELECT zcta, city FROM zcta
                 """)
             elif ubound is None and lbound is not None: 
                 curr.execute(
-                    "SELECT zcta FROM zcta OFFSET %s",
+                    "SELECT zcta, city FROM zcta OFFSET %s",
                     (lbound,))
             elif lbound is None and ubound is not None:
                 curr.execute(
-                    "SELECT zcta FROM zcta FIRST %s ROWS ONLY", 
+                    "SELECT zcta, city FROM zcta FIRST %s ROWS ONLY", 
                     (ubound,))        
             else:
                 curr.execute(
-                    "SELECT zcta FROM zcta OFFSET %s FETCH FIRST %s ROWS ONLY",
-                    (lbound, ubound - lbound if ubound and lbound is not None else None)
+                    "SELECT zcta, city FROM zcta OFFSET %s FETCH FIRST %s ROWS ONLY",
+                    (lbound, ubound - lbound if ubound and lbound is not None else 0)
                 )
             for (z,) in curr: 
                 zcta.append(z)  
