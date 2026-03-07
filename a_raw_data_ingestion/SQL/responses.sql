@@ -3,6 +3,7 @@ CREATE TABLE responses(
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
     zcta INT REFERENCES zcta(zcta),
+    city VARCHAR(30),
 
     api VARCHAR(8) NOT NULL CHECK (api IN ('places','overpass','arcgis','census')),
     response JSONB,

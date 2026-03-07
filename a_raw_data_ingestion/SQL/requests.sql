@@ -3,6 +3,7 @@ CREATE TABLE requests(
     status_code INT,   
     
     zcta INT REFERENCES zcta(zcta),
+    city VARCHAR(30),
     api VARCHAR(8) NOT NULL CHECK (api IN ('places','overpass','arcgis','census')),
     attempt INT,
 

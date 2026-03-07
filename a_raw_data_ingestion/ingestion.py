@@ -11,7 +11,7 @@ from psql.responses import insert_response
 
 
 
-coordinates = get_coordinates(lbound=2, hbound=6)
+coordinates = get_coordinates(lbound=0, hbound=10)
 
 
 
@@ -22,26 +22,26 @@ for i in range(len(coordinates)):
 
 
 
-async def ingest_data():
-    async with aiohttp.ClientSession() as session:
-        # places = [places_tasks(session, coordinate) for  coordinate in coordinates] 
-        # overpass = [overpass_tasks(session, coordinate) for  coordinate in coordinates] 
-        census = [census_tasks(session, coordinate[0]) for  coordinate in coordinates] 
-        arcgis = [arcgis_tasks(session, coordinate[0]) for  coordinate in coordinates] 
+# async def ingest_data():
+#     async with aiohttp.ClientSession() as session:
+#         # places = [places_tasks(session, coordinate) for  coordinate in coordinates] 
+#         # overpass = [overpass_tasks(session, coordinate) for  coordinate in coordinates] 
+#         census = [census_tasks(session, coordinate[0]) for  coordinate in coordinates] 
+#         arcgis = [arcgis_tasks(session, coordinate[0]) for  coordinate in coordinates] 
 
-        results = await asyncio.gather(*census, *arcgis, return_exceptions=True)
+#         results = await asyncio.gather(*census, *arcgis, return_exceptions=True)
 
-        for result in results:
-            if not isinstance(result, tuple) or len(result) != 4:
-                print("Malformed result:", result)
-                continue
+#         for result in results:
+#             if not isinstance(result, tuple) or len(result) != 4:
+#                 print("Malformed result:", result)
+#                 continue
 
-            z, r, s, n = result
+#             z, r, s, n = result
 
-            if s == 200:
-                insert_response(z, n, r)
+#             if s == 200:
+#                 insert_response(z, n, r)
 
 
 
-if __name__ == "__main__":
-    asyncio.run(ingest_data())
+# if __name__ == "__main__":
+#     asyncio.run(ingest_data())
