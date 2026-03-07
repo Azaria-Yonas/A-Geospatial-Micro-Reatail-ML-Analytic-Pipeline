@@ -12,35 +12,26 @@ url = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TA
 
 
 
-zcta = get_zcta()
+zcta, city = get_zcta()
 
 
+async def get_tasks (session, z):
+    async with session.get(url.format(z), ssl=False) as session:
+        response = await session.json(content_type=None)
+        return z, response
 
-print(zcta)
+async def initialize_table():
+    async with aiohttp.ClientSession() as session:
+        tasks = [get_tasks(session, z) for z in zcta]   
+        results = await asyncio.gather(*tasks)
 
-
-
-
-
-
-
-# async def get_tasks (session, z):
-#     async with session.get(url.format(z), ssl=False) as session:
-#         response = await session.json(content_type=None)
-#         return z, response
-
-# async def initialize_table():
-#     async with aiohttp.ClientSession() as session:
-#         tasks = [get_tasks(session, z) for z in zcta]   
-#         results = await asyncio.gather(*tasks)
-
-#         for z, response in results:
-#             bbox = find_bbox(response)
-#             insert_location(z, bbox)
+        for z, response in results:
+            bbox = find_bbox(response)
+            insert_location(z, city, bbox)
 
 
-# if __name__ == "__main__":
-#     asyncio.run(initialize_table())
+if __name__ == "__main__":
+    asyncio.run(initialize_table())
 
 
 
