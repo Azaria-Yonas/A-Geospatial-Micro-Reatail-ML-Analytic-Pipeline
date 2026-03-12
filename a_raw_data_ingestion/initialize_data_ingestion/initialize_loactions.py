@@ -3,8 +3,8 @@ import aiohttp
 
 
 from a_raw_data_ingestion.initialize_data_ingestion.bounding_box import find_bbox
-from psql.locations import insert_location
-from psql.zip_code_tabulation_area import get_zcta
+from psql.raw_data.locations import insert_location
+from psql.raw_data.zip_code_tabulation_area import get_zcta
 
 
 

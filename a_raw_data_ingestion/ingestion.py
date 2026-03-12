@@ -1,12 +1,12 @@
 import asyncio
 import aiohttp
 
-from psql.coordinates import get_coordinates
+from psql.raw_data.coordinates import get_coordinates
 from a_raw_data_ingestion.places import places_tasks
 from a_raw_data_ingestion.overpass import overpass_tasks
 from a_raw_data_ingestion.census import census_tasks
 from a_raw_data_ingestion.arcgis import arcgis_tasks       
-from psql.responses import insert_response
+from psql.raw_data.responses import insert_response
 
 
 

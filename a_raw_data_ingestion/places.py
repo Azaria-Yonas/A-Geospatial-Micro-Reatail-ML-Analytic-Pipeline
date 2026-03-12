@@ -1,8 +1,8 @@
 import asyncio
 import aiohttp
 import os
-from psql.requests import insert_request
-from psql.responses import insert_response
+from psql.raw_data.requests import insert_request
+from psql.raw_data.responses import insert_response
 
 
 API_KEY = os.getenv("Places_Aggregate")

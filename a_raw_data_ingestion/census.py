@@ -1,8 +1,8 @@
 import asyncio
 import aiohttp
 import json
-from psql.requests import insert_request
-from psql.responses import insert_response
+from psql.raw_data.requests import insert_request
+from psql.raw_data.responses import insert_response
 
 
 

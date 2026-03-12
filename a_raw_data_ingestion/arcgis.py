@@ -2,8 +2,8 @@ import asyncio
 import aiohttp
 import json
 import os
-from psql.requests import insert_request
-from psql.responses import insert_response
+from psql.raw_data.requests import insert_request
+from psql.raw_data.responses import insert_response
 
 
 
@@ -23,7 +23,7 @@ def get_body(zcta):
             "ids": [str(zcta)]
         }]),
         "analysisVariables": ",".join([
-            "DaytimePopulation.DPOP_CY",
+            "DaytimePopulation.DPOP_CY", # Day time population
             "businesses.N04_BUS",   # businesses with 1–4 employees
             "businesses.N05_BUS",   # businesses with 5–9 employees
             "urbanicity.URBNAME"    # City classification
