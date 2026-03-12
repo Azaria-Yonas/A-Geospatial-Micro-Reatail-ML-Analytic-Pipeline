@@ -1,11 +1,11 @@
 import psycopg
-from . import DB_NAME, USERNAME, DB_KEY, CITY
+from . import RAWDATA, USERNAME, DB_KEY, CITY
 
 
 
 def get_coordinates(lbound=None, hbound=None):
     coordinates = []
-    with psycopg.connect(f"dbname={DB_NAME} user={USERNAME} password={DB_KEY}") as conn:
+    with psycopg.connect(f"dbname={RAWDATA} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
             if lbound is None and hbound is None:
                 curr.execute("""

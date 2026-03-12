@@ -1,10 +1,10 @@
 import psycopg
-from . import DB_NAME, USERNAME, DB_KEY, CITY
+from . import RAWDATA, USERNAME, DB_KEY, CITY
 
 def get_zcta (lbound = None, ubound = None):
     zcta= []
 
-    with psycopg.connect(f"dbname={DB_NAME} user={USERNAME} password={DB_KEY}") as conn:
+    with psycopg.connect(f"dbname={RAWDATA} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
 
             if ubound is None and lbound is  None:
