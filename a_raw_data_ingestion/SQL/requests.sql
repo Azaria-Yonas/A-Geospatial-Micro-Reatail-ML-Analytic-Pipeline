@@ -1,8 +1,8 @@
-CREATE TABLE requests(
+CREATE TABLE raw_data.requests(
     index_num BIGSERIAL NOT NULL,
     status_code INT,   
     
-    zcta INT REFERENCES zcta(zcta),
+    zcta INT REFERENCES raw_data.zcta(zcta),
     api VARCHAR(8) NOT NULL CHECK (api IN ('places','overpass','arcgis','census')),
     attempt INT,
 
@@ -19,7 +19,7 @@ CREATE TABLE requests(
 );
 
 
-CREATE INDEX requests_zcta_and_api ON requests(zcta, api);
-CREATE INDEX requests_status_code ON requests(status_code);
-CREATE INDEX requests_date_time ON requests(date_time);
+CREATE INDEX requests_zcta_and_api ON raw_data.requests(zcta, api);
+CREATE INDEX requests_status_code ON raw_data.requests(status_code);
+CREATE INDEX requests_date_time ON raw_data.requests(date_time);
  

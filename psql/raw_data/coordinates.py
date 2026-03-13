@@ -1,11 +1,11 @@
 import psycopg
-from . import RAWDATA, USERNAME, DB_KEY, CITY
+from . import DATABASE, USERNAME, DB_KEY, CITY
 
 
 
 def get_coordinates(lbound=None, hbound=None):
     coordinates = []
-    with psycopg.connect(f"dbname={RAWDATA} user={USERNAME} password={DB_KEY}") as conn:
+    with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
             if lbound is None and hbound is None:
                 curr.execute("""
@@ -13,7 +13,7 @@ def get_coordinates(lbound=None, hbound=None):
                         zcta,
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
-                    FROM locations
+                    FROM raw_data.locations
                     WHERE city = %s""",
                 (CITY,))
             elif lbound is not None and hbound is None:
@@ -22,7 +22,7 @@ def get_coordinates(lbound=None, hbound=None):
                         zcta,
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
-                    FROM locations 
+                    FROM raw_data.locations 
                     WHERE city = %s
                     OFFSET %s""",
                     (CITY, lbound))
@@ -32,7 +32,7 @@ def get_coordinates(lbound=None, hbound=None):
                         zcta,
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
-                    FROM locations 
+                    FROM raw_data.locations 
                     WHERE city = %s                   
                     FETCH FIRST %s ROWS ONLY """,
                     (CITY, hbound))
@@ -42,7 +42,7 @@ def get_coordinates(lbound=None, hbound=None):
                         zcta,
                         ROW(down_lat, left_long, up_lat, right_long) AS bbox,
                         ROW(center_lat, center_long, radius) AS center_and_radius
-                    FROM locations
+                    FROM raw_data.locations
                     WHERE city = %s
                     OFFSET %s FETCH FIRST %s ROWS ONLY""", 
                 (CITY, lbound, hbound - lbound if hbound and lbound is not None else 0))

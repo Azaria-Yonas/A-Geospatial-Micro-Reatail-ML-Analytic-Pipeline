@@ -1,0 +1,2 @@
+CREATE DATABASE database;
+CREATE SCHEMA raw_data;

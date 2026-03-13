@@ -1,4 +1,4 @@
-INSERT INTO zcta (city, zcta) VALUES
+INSERT INTO raw_data.zcta (city, zcta) VALUES
 ('seattle','98101'),
 ('seattle','98102'),
 ('seattle','98103'),
@@ -30,7 +30,7 @@ INSERT INTO zcta (city, zcta) VALUES
 ('seattle','98178'),
 ('seattle','98199');
 
-INSERT INTO zcta (city, zcta) VALUES
+INSERT INTO raw_data.zcta (city, zcta) VALUES
 ('losangeles','90001'),
 ('losangeles','90002'),
 ('losangeles','90003'),

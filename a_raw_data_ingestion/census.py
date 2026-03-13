@@ -75,11 +75,6 @@ async def census_tasks (session, zcta):
 
 
 
-
-
-
-
-
 ###########################################
 ###                                     ###
 ###  This here is to test individually  ###
