@@ -1,7 +1,7 @@
 import psycopg
 from psycopg.types.json import Json
 
-from . import DATABASE, USERNAME, DB_KEY
+from .. import DATABASE, USERNAME, DB_KEY
 
 def insert_response(zcta, city, api, response):
     with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:

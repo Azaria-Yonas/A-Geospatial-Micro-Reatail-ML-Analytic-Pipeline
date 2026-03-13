@@ -64,7 +64,7 @@ async def census_tasks (session, zcta):
             insert_request(zcta, "census", url, "GET", body=parameter, status_code=status)  
         except aiohttp.ContentTypeError:
             response = await resp.text() 
-            insert_request(zcta, "places", url, "GET", body=parameter, status_code=status, error_message=response ) 
+            insert_request(zcta, "census", url, "GET", body=parameter, status_code=status, error_message=response ) 
         return zcta, response, status, "census"
 
 

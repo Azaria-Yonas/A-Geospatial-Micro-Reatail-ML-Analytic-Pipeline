@@ -3,7 +3,7 @@ CREATE TABLE raw_data.requests(
     status_code INT,   
     
     zcta INT REFERENCES raw_data.zcta(zcta),
-    api VARCHAR(8) NOT NULL CHECK (api IN ('places','overpass','arcgis','census')),
+    api VARCHAR(8) NOT NULL CHECK (api IN ('places','overpass','arcgis','census', 'cbp')),
     attempt INT,
 
 

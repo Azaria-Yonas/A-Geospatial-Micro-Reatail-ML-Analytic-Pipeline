@@ -1,7 +1,7 @@
 import os
 
 
-DATABASE = "eighthrun"
+DATABASE = "eighthrun"  
 
 DB_KEY = os.getenv("dbKey")
 USERNAME = os.getenv("psqlUser")

@@ -1,7 +1,7 @@
 import psycopg
 from psycopg.types.json import Json
 
-from . import DATABASE, USERNAME, DB_KEY
+from .. import DATABASE, USERNAME, DB_KEY
 
 
 def insert_request(zcta, api, endpoint, method, status_code, error_message = None, headers = None, body = None):

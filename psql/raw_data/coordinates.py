@@ -1,5 +1,5 @@
 import psycopg
-from . import DATABASE, USERNAME, DB_KEY, CITY
+from .. import DATABASE, USERNAME, DB_KEY, CITY
 
 
 

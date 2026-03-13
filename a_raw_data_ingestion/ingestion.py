@@ -5,7 +5,8 @@ from psql.raw_data.coordinates import get_coordinates
 from a_raw_data_ingestion.places import places_tasks
 from a_raw_data_ingestion.overpass import overpass_tasks
 from a_raw_data_ingestion.census import census_tasks
-from a_raw_data_ingestion.arcgis import arcgis_tasks       
+from a_raw_data_ingestion.arcgis import arcgis_tasks
+from a_raw_data_ingestion.cbp import cbp_tasks
 from psql.raw_data.responses import insert_response
 
 
@@ -26,13 +27,14 @@ async def ingest_data():
         # places = [places_tasks(session, coordinate) for  coordinate in coordinates] 
         # overpass = [overpass_tasks(session, coordinate) for  coordinate in coordinates] 
         census = [census_tasks(session, coordinate[0]) for  coordinate in coordinates] 
-        arcgis = [arcgis_tasks(session, coordinate[0]) for  coordinate in coordinates] 
+        arcgis = [arcgis_tasks(session, coordinate[0]) for  coordinate in coordinates]
+        cbp =  [cbp_tasks(session, coordinate[0])  for  coordinate in coordinates]
 
-        results = await asyncio.gather(*census, *arcgis, return_exceptions=True)
+        results = await asyncio.gather(*census, *arcgis, *cbp, return_exceptions=True)
 
         for result in results:
             if not isinstance(result, tuple) or len(result) != 4:
-                print("Malformed result:", result)
+                print("Malformed API Response", result)
                 continue
 
             z, r, s, n = result

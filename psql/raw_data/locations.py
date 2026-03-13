@@ -1,5 +1,5 @@
 import psycopg
-from . import DATABASE, USERNAME, DB_KEY
+from .. import DATABASE, USERNAME, DB_KEY
 
 
 def insert_location (zcta, city, bbox):

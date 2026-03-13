@@ -5,7 +5,7 @@ CREATE TABLE raw_data.responses(
     zcta INT REFERENCES raw_data.zcta(zcta),
     city VARCHAR(30),
 
-    api VARCHAR(8) NOT NULL CHECK (api IN ('places','overpass','arcgis','census')),
+    api VARCHAR(8) NOT NULL CHECK (api IN ('places','overpass','arcgis','census', 'cbp')),
     response JSONB,
     date_time TIMESTAMPTZ DEFAULT now()
 );

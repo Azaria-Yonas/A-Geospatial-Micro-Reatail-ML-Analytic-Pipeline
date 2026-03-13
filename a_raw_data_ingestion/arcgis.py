@@ -24,8 +24,6 @@ def get_body(zcta):
         }]),
         "analysisVariables": ",".join([
             "DaytimePopulation.DPOP_CY", # Day time population
-            "businesses.N04_BUS",   # businesses with 1–4 employees
-            "businesses.N05_BUS",   # businesses with 5–9 employees
             "urbanicity.URBNAME"    # City classification
         ]),
         "returnGeometry": "false"
