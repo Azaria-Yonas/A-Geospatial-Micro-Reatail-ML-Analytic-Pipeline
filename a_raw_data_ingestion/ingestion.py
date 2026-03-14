@@ -12,7 +12,7 @@ from psql.raw_data.responses import insert_response
 
 
 
-coordinates, city = get_coordinates(lbound=0, hbound=1)
+coordinates, city = get_coordinates(lbound=100, hbound=109)
 
 
 
