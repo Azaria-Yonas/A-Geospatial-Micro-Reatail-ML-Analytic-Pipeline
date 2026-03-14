@@ -112,7 +112,8 @@ async def places_tasks(session, coordinate):
             
 # coordinates = ( 98102, (47.6031739999818, -122.3512549998386, 47.61851099976298, -122.32135299996169), (47.61084249987239,-122.33630399990014,1409.8593630867806))
 
-# asyncio.run(func(coordinates))
+# if __name__ == "__main__":
+#     asyncio.run(func(coordinates))
 
 
 

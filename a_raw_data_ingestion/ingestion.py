@@ -2,11 +2,11 @@ import asyncio
 import aiohttp
 
 from psql.raw_data.coordinates import get_coordinates
-from a_raw_data_ingestion.places import places_tasks
-from a_raw_data_ingestion.overpass import overpass_tasks
-from a_raw_data_ingestion.census import census_tasks
-from a_raw_data_ingestion.arcgis import arcgis_tasks
-from a_raw_data_ingestion.cbp import cbp_tasks
+from a_raw_data_ingestion.places_request import places_tasks
+from a_raw_data_ingestion.overpass_request import overpass_tasks
+from a_raw_data_ingestion.census_request import census_tasks
+from a_raw_data_ingestion.arcgis_request import arcgis_tasks
+from a_raw_data_ingestion.cbp_request import cbp_tasks
 from psql.raw_data.responses import insert_response
 
 
