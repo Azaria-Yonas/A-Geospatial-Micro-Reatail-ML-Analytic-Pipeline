@@ -28,6 +28,7 @@ async def initialize_table():
         for z, response in results:
             bbox = find_bbox(response)
             insert_location(z, city, bbox)
+            print (f"Inserted: {z}")
 
 
 if __name__ == "__main__":
