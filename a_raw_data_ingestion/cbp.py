@@ -67,9 +67,6 @@ async def cbp_tasks(session, zcta):
             overall_status = status
 
     insert_request(zcta, "cbp", url, "GET", body=params_used, status_code=overall_status)  
-
-
-
     return zcta, results, overall_status, "cbp"
 
 

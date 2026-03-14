@@ -1,0 +1,43 @@
+from .. import DATABASE, DB_KEY, CITY
+import psycopg as pg
+
+
+def fetch_response(api, lbound=None, hbound=None):
+
+    responses = []
+
+    with pg.connect(f"dbname={DATABASE} password={DB_KEY}") as conn:
+        with conn.cursor() as curr:
+            if lbound is None and hbound is None:
+
+                curr.execute("""
+                    SELECT response
+                    FROM raw_data.responses
+                    WHERE city = %s AND api = %s
+                """, (CITY, api))
+            elif lbound is not None and hbound is None:
+                curr.execute("""
+                    SELECT response
+                    FROM raw_data.responses
+                    WHERE city = %s AND api = %s
+                    OFFSET %s
+                """, (CITY, api, lbound))
+            elif lbound is None and hbound is not None:
+                curr.execute("""
+                    SELECT response
+                    FROM raw_data.responses
+                    WHERE city = %s AND api = %s
+                    FETCH FIRST %s ROWS ONLY
+                """, (CITY, api, hbound))
+            else:
+                curr.execute("""
+                    SELECT response
+                    FROM raw_data.responses
+                    WHERE city = %s AND api = %s
+                    OFFSET %s
+                    FETCH FIRST %s ROWS ONLY
+                """, (CITY, api, lbound, hbound - lbound if hbound and lbound is not None else 0))
+            for (r,) in curr:
+                responses.append(r)
+
+    return responses
