@@ -66,7 +66,7 @@ async def cbp_tasks(session, zcta):
         if status != 200:
             overall_status = status
 
-    insert_request(zcta, "census", url, "GET", body=params_used, status_code=overall_status)  
+    insert_request(zcta, "cbp", url, "GET", body=params_used, status_code=overall_status)  
 
 
 
@@ -78,11 +78,11 @@ async def cbp_tasks(session, zcta):
 
 
 
-###########################################
-###                                     ###
-###  This here is to test individually  ###
-###                                     ###
-###########################################
+##########################################
+##                                     ###
+##  This here is to test individually  ###
+##                                     ###
+##########################################
 
 
 

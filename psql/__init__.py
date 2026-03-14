@@ -5,4 +5,4 @@ DATABASE = "ninthrun"
 
 DB_KEY = os.getenv("dbKey")
 USERNAME = os.getenv("psqlUser")
-CITY = "losangeles"
+CITY = "seattle"

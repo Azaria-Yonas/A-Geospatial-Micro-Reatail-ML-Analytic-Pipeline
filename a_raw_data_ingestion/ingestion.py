@@ -12,13 +12,12 @@ from psql.raw_data.responses import insert_response
 
 
 
-coordinates, city = get_coordinates(lbound=25, hbound=30)
+coordinates, city = get_coordinates(lbound=0, hbound=1)
 
 
 
 for i in range(len(coordinates)):
-    print (f"{i+1} :  {coordinates[i]}")
-    print(city)
+    print (f"{i+1}. {city}  {coordinates[i]}")
 
 
 
@@ -39,8 +38,9 @@ async def ingest_data():
 
             z, r, s, n = result
 
-            if s == 200:
+            if s in (200,204,206):
                 insert_response(z, city, n, r)
+
 
 
 
