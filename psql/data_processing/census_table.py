@@ -4,6 +4,7 @@ import psycopg as pg
 
 
 def insert_variables(
+    zcta,
     total_population,        
     median_household_income,
     per_capita_income,       
@@ -39,6 +40,7 @@ def insert_variables(
         with conn.cursor() as curr:
             curr.execute("""
                 INSERT INTO processed_data.census_variables (
+                    zcta, city,
                     total_population,        
                     median_household_income,
                     per_capita_income,       
@@ -71,14 +73,18 @@ def insert_variables(
                                
                 )
                 VALUES (
-                    %s,%s,%s,%s,%s,%s,%s,%s,
-                    %s,%s,%s,%s,%s,%s,
+                    %s,%s%s,%s,%s,%s,%s,
+                    %s,%s,%s,%s,%s,
                     %s,%s,%s,%s,
                     %s,%s,%s,
-                    %s,%s
+                    %s,%s,%s,
+                    %s,%s,
+                    %s
                 );
                 """,
                 (
+                    zcta,CITY,
+                    
                     total_population,               #1 
                     median_household_income,        #2
                     per_capita_income,              #3  
