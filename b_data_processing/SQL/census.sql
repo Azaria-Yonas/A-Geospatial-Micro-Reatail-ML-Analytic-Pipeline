@@ -1,4 +1,4 @@
-CREATE TABLE processed_data.census_zcta (
+CREATE TABLE processed_data.census_variables (
     index_num BIGSERIAL NOT NULL,
     zcta INT PRIMARY KEY REFERENCES raw_data.zcta(zcta),
     city VARCHAR(50), 
@@ -36,4 +36,4 @@ CREATE TABLE processed_data.census_zcta (
 
 );
 
-CREATE INDEX census_city_zcta ON processed_data.census_zcta (city, zcta);
+CREATE INDEX census_city_zcta ON processed_data.census_variables (city, zcta);
