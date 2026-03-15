@@ -1,12 +1,12 @@
-from .. import DATABASE, DB_KEY, CITY
+from .. import DATABASE, USERNAME, DB_KEY, CITY
 import psycopg as pg
 
 
-def fetch_response(api, lbound=None, hbound=None):
+def get_response(api, lbound=None, hbound=None):
 
     responses = []
 
-    with pg.connect(f"dbname={DATABASE} password={DB_KEY}") as conn:
+    with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
             if lbound is None and hbound is None:
 
