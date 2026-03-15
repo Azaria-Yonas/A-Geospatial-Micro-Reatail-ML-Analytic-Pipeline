@@ -17,7 +17,7 @@ CREATE TABLE processed_data.census_variables (
 
     public_transport_users INTEGER,  -- B08301_010E
     total_commuters INTEGER,         -- B08012_001E
-    aggregate_commute_time BIGINT,   -- B08013_001E
+    aggregate_commute_time INTEGER,   -- B08013_001E
     no_vehicle_households INTEGER,   -- B08201_002E
 
     renter_occupied INTEGER,         -- B25003_003E
