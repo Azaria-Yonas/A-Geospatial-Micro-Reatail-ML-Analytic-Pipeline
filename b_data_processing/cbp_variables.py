@@ -1,8 +1,8 @@
 from psql.raw_data.responses import get_response
 
+from psql.data_processing.cbp_table import insert_variables
 
-
-def parse_cbp(r):
+def parse_cbp(zcta, r):
     def get_vals(key):
         if r[key] is None:
             return 0, 0
@@ -24,7 +24,6 @@ def parse_cbp(r):
     estab_500_999, emp_500_999 = get_vals("500_999")
     estab_1000_plus, emp_1000_plus = get_vals("1000_plus")
 
-    zcta = r["all"][1][3]
 
     return (
         zcta,
@@ -52,9 +51,8 @@ def parse_cbp(r):
 
 
 if __name__ == "__main__":
-    response = get_response("cbp")
-    i = 1
-    for r in response:
-        print(f"Result {i}: {parse_cbp(r)}")
-        i += 1
+    response = get_response("cbp").items()
+
+    for z, r in response:
+        insert_variables(*parse_cbp(z, r))
     
