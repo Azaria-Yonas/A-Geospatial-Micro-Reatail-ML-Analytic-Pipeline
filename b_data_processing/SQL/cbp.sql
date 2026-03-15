@@ -1,4 +1,4 @@
-CREATE TABLE processed_data.cbp_zcta (
+CREATE TABLE processed_data.cbp_variables (
     index_num BIGSERIAL NOT NULL,
 
     zcta INT PRIMARY KEY REFERENCES raw_data.zcta(zcta),
@@ -57,4 +57,4 @@ CREATE TABLE processed_data.cbp_zcta (
 );
 
 
-CREATE INDEX cbp_city_zcta ON processed_data.cbp_zcta (city, zcta);
+CREATE INDEX cbp_city_zcta ON processed_data.cbp_variables (city, zcta);
