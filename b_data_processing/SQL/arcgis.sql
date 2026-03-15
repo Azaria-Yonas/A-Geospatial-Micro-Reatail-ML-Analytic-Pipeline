@@ -6,6 +6,6 @@ CREATE TABLE processed_data.arcgis_variables(
 
     daytime_population INTEGER,
 
-    urbanicity VARCHAR(50),
+    urbanicity VARCHAR(50)
 
 );
