@@ -73,18 +73,18 @@ def insert_variables(
                                
                 )
                 VALUES (
-                    %s,%s%s,%s,%s,%s,%s,
+                    %s,%s,%s,%s,%s,%s,%s,
+                    %s,%s,%s,%s,%s,%s,
                     %s,%s,%s,%s,%s,
-                    %s,%s,%s,%s,
-                    %s,%s,%s,
                     %s,%s,%s,
                     %s,%s,
+                    %s,
                     %s
                 );
                 """,
                 (
                     zcta,CITY,
-                    
+
                     total_population,               #1 
                     median_household_income,        #2
                     per_capita_income,              #3  
