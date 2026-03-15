@@ -15,7 +15,7 @@ def insert_variables(
     estab_250_499, emp_250_499,
     estab_500_999, emp_500_999,
     estab_1000_plus, emp_1000_plus
-    ):
+):
 
     with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
