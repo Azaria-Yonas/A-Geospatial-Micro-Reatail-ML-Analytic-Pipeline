@@ -55,3 +55,6 @@ CREATE TABLE processed_data.cbp_zcta (
     emp_1000_plus INTEGER
 
 );
+
+
+CREATE INDEX cbp_city_zcta ON processed_data.cbp_zcta (city, zcta);

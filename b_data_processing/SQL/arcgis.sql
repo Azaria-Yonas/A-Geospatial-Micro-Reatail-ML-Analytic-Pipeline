@@ -9,3 +9,5 @@ CREATE TABLE processed_data.arcgis_variables(
     urbanicity VARCHAR(50)
 
 );
+
+CREATE INDEX arcgis_city_zcta ON processed_data.arcgis_variables (city, zcta);

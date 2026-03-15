@@ -11,3 +11,6 @@ CREATE TABLE processed_data.overpass_zcta (
     human_scale_streets INTEGER
 
 );
+
+
+CREATE INDEX overpass_city_zcta ON processed_data.overpass_zcta (city, zcta);

@@ -35,3 +35,5 @@ CREATE TABLE processed_data.census_zcta (
     female_40_44 INTEGER             -- B01001_038E
 
 );
+
+CREATE INDEX census_city_zcta ON processed_data.census_zcta (city, zcta);
