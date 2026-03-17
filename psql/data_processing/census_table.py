@@ -5,6 +5,7 @@ import psycopg as pg
 
 def insert_variables(
     zcta,
+    
     total_population,        
     median_household_income,
     per_capita_income,       
@@ -33,8 +34,8 @@ def insert_variables(
     female_25_29,       
     female_30_34,         
     female_35_39,          
-    female_40_44        
-        
+    female_40_44,        
+    city = CITY,    
 ):
     with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
@@ -83,7 +84,7 @@ def insert_variables(
                 );
                 """,
                 (
-                    zcta,CITY,
+                    zcta,city,
 
                     total_population,               #1 
                     median_household_income,        #2
@@ -115,3 +116,37 @@ def insert_variables(
                     female_35_39,                   #22       
                     female_40_44                    #23
                 ))
+            
+
+
+def get_variables(lbound = None, hbound = None, city = CITY, *args):
+    cols = ", ".join(args)
+    with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
+        with conn.cursor() as curr:
+            if lbound is None and hbound is None:
+                curr.execute("""
+                    SELECT %s FROM processed_data.census_variables
+                    WHERE city = %s;   
+                """,
+                (cols, city))
+            elif hbound is None and lbound is not None: 
+                curr.execute("""
+                    SELECT %s FROM processed_data.census_variables
+                    WHERE city = %s
+                    OFFSET %s;
+                """,
+                (cols, city, lbound))
+            elif lbound is None and hbound is not None:
+                curr.execute("""
+                    SELECT %s FROM processed_data.census_variables
+                    WHERE city = %s
+                    FIRST %s ROWS ONLY;
+                """, 
+                (cols, city, hbound))        
+            else:
+                curr.execute("""
+                    SELECT %s FROM processed_data.census_variables
+                    WHERE city = %s
+                    OFFSET %s FETCH FIRST %s ROWS ONLY;
+                """,
+                (cols, city, lbound, hbound - lbound if hbound and lbound is not None else 0))

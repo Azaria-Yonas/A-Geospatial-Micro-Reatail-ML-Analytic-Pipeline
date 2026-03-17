@@ -13,5 +13,5 @@ def insert_variables(zcta, dtp, urb):
             """, 
             (zcta, CITY, dtp, urb))
 
-def get_variables(lbound = None, hbound = None):
+def get_variables(lbound = None, hbound = None, *args):
     pass
