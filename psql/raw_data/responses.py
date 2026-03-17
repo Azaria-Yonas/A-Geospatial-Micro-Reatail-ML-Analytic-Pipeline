@@ -14,7 +14,7 @@ def insert_response(zcta, city, api, response):
 
 
 
-def get_response(api, lbound=None, hbound=None):
+def get_response(api, city = CITY, lbound=None, hbound=None):
 
     responses = {}
 
@@ -26,21 +26,21 @@ def get_response(api, lbound=None, hbound=None):
                     SELECT zcta ,response
                     FROM raw_data.responses
                     WHERE city = %s AND api = %s
-                """, (CITY, api))
+                """, (city, api))
             elif lbound is not None and hbound is None:
                 curr.execute("""
                     SELECT zcta, response
                     FROM raw_data.responses
                     WHERE city = %s AND api = %s
                     OFFSET %s
-                """, (CITY, api, lbound))
+                """, (city, api, lbound))
             elif lbound is None and hbound is not None:
                 curr.execute("""
                     SELECT zcta, response
                     FROM raw_data.responses
                     WHERE city = %s AND api = %s
                     FETCH FIRST %s ROWS ONLY
-                """, (CITY, api, hbound))
+                """, (city, api, hbound))
             else:
                 curr.execute("""
                     SELECT zcta, response
@@ -48,7 +48,7 @@ def get_response(api, lbound=None, hbound=None):
                     WHERE city = %s AND api = %s
                     OFFSET %s
                     FETCH FIRST %s ROWS ONLY
-                """, (CITY, api, lbound, hbound - lbound if hbound and lbound is not None else 0))
+                """, (city, api, lbound, hbound - lbound if hbound and lbound is not None else 0))
             for (zcta,r) in curr:
                 responses[zcta] = r
 

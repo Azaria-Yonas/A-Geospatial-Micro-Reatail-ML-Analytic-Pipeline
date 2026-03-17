@@ -3,7 +3,7 @@ from .. import DATABASE, USERNAME, DB_KEY, CITY
 
 
 
-def get_coordinates(lbound=None, hbound=None):
+def get_coordinates(city = CITY, lbound=None, hbound=None):
     coordinates = []
     with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
@@ -15,7 +15,7 @@ def get_coordinates(lbound=None, hbound=None):
                         ROW(center_lat, center_long, radius) AS center_and_radius
                     FROM raw_data.locations
                     WHERE city = %s""",
-                (CITY,))
+                (city,))
             elif lbound is not None and hbound is None:
                 curr.execute("""
                     SELECT
@@ -25,7 +25,7 @@ def get_coordinates(lbound=None, hbound=None):
                     FROM raw_data.locations 
                     WHERE city = %s
                     OFFSET %s""",
-                    (CITY, lbound))
+                    (city, lbound))
             elif lbound is None and hbound is not None:
                 curr.execute("""
                     SELECT
@@ -35,7 +35,7 @@ def get_coordinates(lbound=None, hbound=None):
                     FROM raw_data.locations 
                     WHERE city = %s                   
                     FETCH FIRST %s ROWS ONLY """,
-                    (CITY, hbound))
+                    (city, hbound))
             else:
                 curr.execute("""
                     SELECT
@@ -45,8 +45,8 @@ def get_coordinates(lbound=None, hbound=None):
                     FROM raw_data.locations
                     WHERE city = %s
                     OFFSET %s FETCH FIRST %s ROWS ONLY""", 
-                (CITY, lbound, hbound - lbound if hbound and lbound is not None else 0))
+                (city, lbound, hbound - lbound if hbound and lbound is not None else 0))
             for coordinate in curr:
                 coordinates.append(coordinate)
-    return coordinates, CITY
+    return coordinates, city
 
