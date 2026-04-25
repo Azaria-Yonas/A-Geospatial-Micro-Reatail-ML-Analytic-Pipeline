@@ -3,9 +3,9 @@ import aiohttp
 import os
 from psql.raw_data.requests import insert_request
 from psql.raw_data.responses import insert_response
+from config import PLACES
 
 
-API_KEY = os.getenv("Places_Aggregate")
 
 
 URL = "https://areainsights.googleapis.com/v1:computeInsights" 
@@ -71,14 +71,14 @@ def get_body(coor):
 
 async def places_tasks(session, coordinate):
     body = get_body(coordinate[2])
-    async with session.post(url=URL, headers=get_header(API_KEY), json=body) as resp:
+    async with session.post(url=URL, headers=get_header(PLACES), json=body) as resp:
         status = resp.status
         try: 
             response = await resp.json()        
-            insert_request(coordinate[0], "places", URL, "POST", headers=get_header(API_KEY), body=body, status_code=status) 
+            insert_request(coordinate[0], "places", URL, "POST", headers=get_header(PLACES), body=body, status_code=status) 
         except aiohttp.ContentTypeError:
             response = await resp.text() 
-            insert_request(coordinate[0], "places", URL, "POST", headers=get_header(API_KEY), body=body, status_code=status, error_message=response ) 
+            insert_request(coordinate[0], "places", URL, "POST", headers=get_header(PLACES), body=body, status_code=status, error_message=response ) 
         return coordinate[0], response, status, "places"
 
 

@@ -1,16 +1,14 @@
-
 import os
+from dotenv import load_dotenv
 
-# Database Connection
+load_dotenv()
 
-DATABASE = "ninthrun"  
-DB_KEY = os.getenv("dbKey")
-USERNAME = os.getenv("psqlUser")
-CITY = "seattle"
+# Postgres Credentials:
+PSQL_KEY = os.getenv("DB_KEY")
+PSQL_USER = os.getenv("USERNAME")
 
-#API Keys
-
-API_KEY = os.getenv("ArcGIS")
-API_KEY = os.getenv("Places_Aggregate")
+# API Keys:
+PLACES = os.getenv("PLACES_KEY")
+ARGIS = os.getenv("ARGIS_KEY")  
 
 

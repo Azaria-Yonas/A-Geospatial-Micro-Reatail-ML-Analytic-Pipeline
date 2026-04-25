@@ -4,27 +4,26 @@ import json
 import os
 from psql.raw_data.requests import insert_request
 from psql.raw_data.responses import insert_response
-
+from config import ARGIS
 
 
 URL = "https://geoenrich.arcgis.com/arcgis/rest/services/World/GeoEnrichmentServer/GeoEnrichment/enrich"
 
-API_KEY = os.getenv("ArcGIS")  
 
 
 
 def get_body(zcta):
     return {
         "f": "json",
-        "token": API_KEY,  
+        "token": ARGIS,  
         "studyAreas": json.dumps([{
             "sourceCountry": "US",
             "layer": "US.ZIP5",
             "ids": [str(zcta)]
         }]),
         "analysisVariables": ",".join([
-            "DaytimePopulation.DPOP_CY", # Day time population
-            "urbanicity.URBNAME"    # City classification
+            "DaytimePopulation.DPOP_CY",    # Day time population
+            "urbanicity.URBNAME"            # City classification
         ]),
         "returnGeometry": "false"
     }
