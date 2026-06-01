@@ -19,10 +19,7 @@ ENV/
 # ======================
 # Environment Variables
 # ======================
-.env
-.env.*
-*.key
-*.secret
+Pipeline/.env/.env
 
 # ======================
 # OS / Editor
