@@ -22,21 +22,21 @@ def get_body(zcta):
             "ids": [str(zcta)]
         }]),
         "analysisVariables": ",".join([
-            "AgeDependency.CHILD_CY",         # 2026 Child Population 
-            "AgeDependency.WORKAGE_CY",      # 2026 Working Population 
-            "AgeDependency.SENIOR_CY",       # 2026 Senior Population
-            "crime.CRMCYTOTC",               # 2026 Total Crime Index           
-            "DaytimePopulation.DPOP_CY",     # 2026 Total Daytime Population
-            "DaytimePopulation.DPOPWRK_CY",  # 2026 Daytime Pop: Workers  
-            "DaytimePopulation.DPOPDENSCY",  # 2026 Daytime Pop Density
-            "disposableincome.MEDDI_CY",     # 2026 Median Disposable Income 
-            "disposableincome.AVGDI_CY",     # 2026 Average Disposable Income 
-            "education.X11002_A",            # 2026 Avg: College Tuition 
-            "financial.X14058_A",            # 2026 Avg: Value of Stocks
-            "homevalue.MEDVAL_CY",           # 2026 Median Home Value 
-            "homevalue.AVGVAL_CY",           # 2026 Average Home Value 
-            "networth.MEDNW_CY",             # 2026 Median Net Worth 
-            "networth.AVGNW_CY",             # 2026 Average Net Worth 
+            "AgeDependency.CHILD_CY",        # 19. 2026 Child Population 
+            "AgeDependency.WORKAGE_CY",      # 20. 2026 Working Population 
+            "AgeDependency.SENIOR_CY",       # 21. 2026 Senior Population
+            "crime.CRMCYTOTC",               # 22. 2026 Total Crime Index           
+            "DaytimePopulation.DPOP_CY",     # 23. 2026 Total Daytime Population
+            "DaytimePopulation.DPOPWRK_CY",  # 24. 2026 Daytime Pop: Workers  
+            "DaytimePopulation.DPOPDENSCY",  # 25. 2026 Daytime Pop Density
+            "disposableincome.MEDDI_CY",     # 26. 2026 Median Disposable Income 
+            "disposableincome.AVGDI_CY",     # 27. 2026 Average Disposable Income 
+            "education.X11002_A",            # 28. 2026 Avg: College Tuition 
+            "financial.X14058_A",            # 29. 2026 Avg: Value of Stocks
+            "homevalue.MEDVAL_CY",           # 30. 2026 Median Home Value 
+            "homevalue.AVGVAL_CY",           # 31. 2026 Average Home Value 
+            "networth.MEDNW_CY",             # 32. 2026 Median Net Worth 
+            "networth.AVGNW_CY",             # 33. 2026 Average Net Worth 
         ]),
         "returnGeometry": "false"
     }
