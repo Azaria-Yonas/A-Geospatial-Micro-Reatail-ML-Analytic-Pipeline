@@ -1,5 +1,5 @@
 import os
-from config import DB_KEY, USERNAME
+from config import DB_KEY, USERNAME, DATABASE 
 
-DATABASE = "ninthrun"  
+
 
