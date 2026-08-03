@@ -3,9 +3,9 @@ from .. import DATABASE, USERNAME, DB_KEY
 
 
 def get_zcta (state: str | None = None, lbound: int | None = None, hbound: int | None = None):
-    """This fucntion build the query based on the values specified. State filters the ZCTAs by state, 
-    hbound serves as a upper bound and lbound as the lower bound, which is helpful if only a subset of t
-    data is needed."""
+    """This fucntion build the query based on the values specified. State filters the ZCTAs 
+    by state, hbound serves as a upper bound and lbound as the lower bound, which is helpful
+    if only a subset of t data is needed.""" 
 
     zcta= []
 
@@ -41,7 +41,7 @@ def load_zcta(state, zcta):
 
     with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn: 
         with conn.cursor() as curr: 
-            curr.execute("""
-                INSERT INTO raw_data.zcta (state, zcta) VALUES (%s, %s) 
+            curr.executemany("""
+                INSERT INTO raw_data.zcta (state, zcta) VALUES (%s, %s)
             """, 
-            (state, zcta)) 
+            [(state, z) for z in zcta]) 
