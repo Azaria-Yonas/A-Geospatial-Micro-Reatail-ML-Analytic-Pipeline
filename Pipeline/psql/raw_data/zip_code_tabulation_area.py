@@ -1,36 +1,47 @@
 import psycopg
-from .. import DATABASE, USERNAME, DB_KEY, CITY
+from .. import DATABASE, USERNAME, DB_KEY 
 
-def get_zcta (city = CITY, lbound = None, hbound = None):
+
+def get_zcta (state: str | None = None, lbound: int | None = None, hbound: int | None = None):
+    """This fucntion build the query based on the values specified. State filters the ZCTAs by state, 
+    hbound serves as a upper bound and lbound as the lower bound, which is helpful if only a subset of t
+    data is needed."""
+
     zcta= []
 
-    with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
-        with conn.cursor() as curr:
+    query = "SELECT zcta FROM raw_data.zcta "
+    conditions = []
+    paramerters = []
+    
+    if state is not None:
+        conditions.append("WHERE state = %s ")
+        paramerters.append(state)
+    
+    if lbound is not None:
+        conditions.append("OFFSET %s")
+        paramerters.append(lbound)
+    
+    if hbound is not None: 
+        conditions.append("FETCH FIRST %s ROWS ONLY")
+        paramerters.append(hbound)
 
-            if hbound is None and lbound is  None:
-                curr.execute("""
-                    SELECT zcta FROM raw_data.zcta
-                    WHERE city = %s""",
-                    (city,))
-            elif hbound is None and lbound is not None: 
-                curr.execute("""
-                    SELECT zcta FROM raw_data.zcta
-                    WHERE city = %s
-                    OFFSET %s""",
-                    (city, lbound))
-            elif lbound is None and hbound is not None:
-                curr.execute("""
-                    SELECT zcta FROM raw_data.zcta
-                    WHERE city = %s
-                    FIRST %s ROWS ONLY""", 
-                    (city, hbound))        
-            else:
-                curr.execute("""
-                    SELECT zcta FROM raw_data.zcta
-                    WHERE city = %s
-                    OFFSET %s FETCH FIRST %s ROWS ONLY""",
-                    (city, lbound, hbound - lbound if hbound and lbound is not None else 0)
+
+    with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
+        with conn.cursor() as curr: 
+            curr.execute("SELECT zcta FROM raw_data.zcta".join(conditions),
+                    paramerters
                 )
             for (z,) in curr: 
                 zcta.append(z)  
-    return zcta, city 
+    return zcta, state 
+
+
+def load_zcta(state, zcta): 
+    """This funciton is loads the raw zcta from each state into a the zcta table.""" 
+
+    with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn: 
+        with conn.cursor() as curr: 
+            curr.execute("""
+                INSERT INTO raw_data.zcta (state, zcta) VALUES (%s, %s) 
+            """, 
+            (state, zcta)) 
