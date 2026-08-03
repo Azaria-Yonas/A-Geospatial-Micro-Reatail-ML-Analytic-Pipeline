@@ -1,7 +1,7 @@
 CREATE TABLE raw_data.zcta(
-    Index_num BIGSERIAL NOT NULL,
+    Index_num BIGSERIAL PRIMARY KEY,
     state VARCHAR(30),
-    zcta INT PRIMARY KEY
+    zcta INT NOT NULL
 );
 
 
