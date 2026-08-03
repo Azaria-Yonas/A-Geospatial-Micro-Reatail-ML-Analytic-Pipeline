@@ -5,8 +5,9 @@ load_dotenv(".env/.env")
 
 
 # Postgres Credentials:
-PSQL_KEY = os.getenv("DB_KEY")
-PSQL_USER = os.getenv("USERNAME")          
+DB_KEY = os.getenv("DB_KEY")
+USERNAME = os.getenv("USERNAME")          
+DATABASE = os.getenv("") 
 
 
 # API Keys:
