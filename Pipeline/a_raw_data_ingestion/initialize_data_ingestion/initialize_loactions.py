@@ -12,7 +12,7 @@ url = "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TA
 
 
 
-zcta, city = get_zcta()
+zcta, state = get_zcta() 
  
 
 async def get_tasks (session, z):
@@ -27,7 +27,7 @@ async def initialize_table():
 
         for z, response in results:
             bbox = find_bbox(response)
-            insert_location(z, city, bbox)
+            insert_location(z, state, bbox) 
             print (f"Inserted: {z}")
 
 
