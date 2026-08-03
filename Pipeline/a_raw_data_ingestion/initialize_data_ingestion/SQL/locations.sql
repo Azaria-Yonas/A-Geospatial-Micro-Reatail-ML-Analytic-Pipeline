@@ -2,7 +2,7 @@ CREATE TABLE raw_data.locations (
     index_num BIGSERIAL NOT NULL,
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     zcta INT UNIQUE REFERENCES raw_data.zcta(zcta),
-    city VARCHAR(30),
+    state VARCHAR(30),
     down_lat FLOAT,
     left_long FLOAT,
     up_lat FLOAT,
