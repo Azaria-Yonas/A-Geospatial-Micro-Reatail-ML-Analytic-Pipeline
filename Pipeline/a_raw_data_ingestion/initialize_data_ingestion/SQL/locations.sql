@@ -19,5 +19,5 @@ CREATE TABLE raw_data.locations (
 );
 
 
-CREATE INDEX locations_city_index ON raw_data.locations (city);
+CREATE INDEX locations_state_index ON raw_data.locations (state);
 
