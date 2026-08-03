@@ -33,9 +33,9 @@
 
 - The TigerWEB API endpoint returns a dictionary of tens of thousands of coordinates precisely mapping all the streets, roads, and builds that are included in that ZCTA. However I found that storing the bounding boxes is better as the values of the variables are roughly the same while being easier to work with. Therefore, I used a simple algorithm to pull the extremes (minLat, minLong, maxLat, maxLong).
 
-#### 3. get_zcta.py
+#### 3. fetch_zcta.py
 
-- Initially I was Cluster sampling (I chose cities such as LA and Seattle to make predictions Nation wide) however now I am using a Stratified Random Sampling over each state. As a result it would be very difficult to type down around 10,000 ZCTAs into a INSERT query. This file is a script that fetches all the ZCTA state by state and random picks one third.
+- Initially I was Cluster sampling (I chose cities such as LA and Seattle to make predictions Nation wide) however now I am using a Stratified Random Sampling over each state. As a result it would be very difficult to type down around 10,000 ZCTAs into a INSERT query. This file is a script that fetches all the ZCTA state by state and random picks one third. This will be my sample.
 
 
 
