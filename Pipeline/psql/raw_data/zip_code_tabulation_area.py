@@ -8,9 +8,9 @@ def get_zcta (state: str | None = None, lbound: int | None = None, hbound: int |
     if only a subset of t data is needed.""" 
 
     zcta= []
+    states = []
 
-    query = "SELECT zcta FROM raw_data.zcta "
-    conditions = []
+    conditions = [] 
     paramerters = []
     
     if state is not None:
@@ -28,12 +28,13 @@ def get_zcta (state: str | None = None, lbound: int | None = None, hbound: int |
 
     with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr: 
-            curr.execute("SELECT zcta FROM raw_data.zcta".join(conditions),
+            curr.execute("SELECT zcta, state FROM raw_data.zcta " + " ".join(conditions),
                     paramerters
                 )
-            for (z,) in curr: 
+            for (z,s) in curr: 
                 zcta.append(z)  
-    return zcta, state 
+                states.append(s)
+    return zcta, states 
 
 
 def load_zcta(state, zcta): 
@@ -43,5 +44,6 @@ def load_zcta(state, zcta):
         with conn.cursor() as curr: 
             curr.executemany("""
                 INSERT INTO raw_data.zcta (state, zcta) VALUES (%s, %s)
+                ON CONFLICT (zcta) DO NOTHING 
             """, 
             [(state, z) for z in zcta]) 
