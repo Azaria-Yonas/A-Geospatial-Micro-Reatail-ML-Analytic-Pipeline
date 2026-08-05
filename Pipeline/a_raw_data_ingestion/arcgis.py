@@ -19,7 +19,7 @@ def get_body(zcta):
         "studyAreas": json.dumps([{
             "sourceCountry": "US",
             "layer": "US.ZIP5", 
-            "ids": [str(zcta)]
+            "ids": zcta 
         }]),
         "analysisVariables": ",".join([
             "AgeDependency.CHILD_CY",        # 19. 2026 Child Population 
