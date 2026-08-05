@@ -12,27 +12,19 @@ URL_REL = "https://www2.census.gov/geo/docs/maps-data/data/rel/zcta_county_rel_1
 
 
 
-
-
-
-STATE_CODES_REVERSE = {
-    "01": "AL", "02": "AK", "04": "AZ", "05": "AR", "06": "CA",
-    "08": "CO", "09": "CT", "10": "DE", "11": "DC", "12": "FL",
-    "13": "GA", "15": "HI", "16": "ID", "17": "IL", "18": "IN",
-    "19": "IA", "20": "KS", "21": "KY", "22": "LA", "23": "ME",
-    "24": "MD", "25": "MA", "26": "MI", "27": "MN", "28": "MS",
-    "29": "MO", "30": "MT", "31": "NE", "32": "NV", "33": "NH",
-    "34": "NJ", "35": "NM", "36": "NY", "37": "NC", "38": "ND",
-    "39": "OH", "40": "OK", "41": "OR", "42": "PA", "44": "RI",
-    "45": "SC", "46": "SD", "47": "TN", "48": "TX", "49": "UT",
-    "50": "VT", "51": "VA", "53": "WA", "54": "WV", "55": "WI",
+STATE_CODE = {
+    "01": "AL", "02": "AK", "04": "AZ", "05": "AR", "06": "CA", "08": "CO", "09": "CT", "10": "DE", "11": "DC", "12": "FL",
+    "13": "GA", "15": "HI", "16": "ID", "17": "IL", "18": "IN", "19": "IA", "20": "KS", "21": "KY", "22": "LA", "23": "ME",
+    "24": "MD", "25": "MA", "26": "MI", "27": "MN", "28": "MS", "29": "MO", "30": "MT", "31": "NE", "32": "NV", "33": "NH",
+    "34": "NJ", "35": "NM", "36": "NY", "37": "NC", "38": "ND", "39": "OH", "40": "OK", "41": "OR", "42": "PA", "44": "RI", 
+    "45": "SC", "46": "SD", "47": "TN", "48": "TX", "49": "UT", "50": "VT", "51": "VA", "53": "WA", "54": "WV", "55": "WI",
     "56": "WY",
 } 
 
 
-
-
-def get_zcta_state_crosswalk(): 
+def get_crosswalk(): 
+    """This function is is used to match each zcta with a state code 
+    and then assigns it a tag from the STATE_CODES dictionary"""
 
     response = requests.get(URL_REL)
 
@@ -55,7 +47,7 @@ def get_zcta_state_crosswalk():
         if len(parts) > state_idx: 
             zcta = parts[zcta_idx]
             state_fips = parts[state_idx]
-            state_abbr = STATE_CODES_REVERSE.get(state_fips)
+            state_abbr = STATE_CODE.get(state_fips)
             
             if state_abbr:
                 zcta_to_states[zcta].add(state_abbr)
@@ -68,13 +60,14 @@ def get_zcta_state_crosswalk():
 
 
 def rand(array):
+    """This function randomly fetches one third of all the ZCTAs per state"""
     x = array        
     random.shuffle(x) 
     return x[:len(x) // 3] 
 
 
 def get_distribution(): 
-    crosswalk = get_zcta_state_crosswalk() 
+    crosswalk = get_crosswalk() 
      
     
     params = {
@@ -110,7 +103,7 @@ def get_distribution():
     
     for state, zctas in state_to_api_zctas.items():
         load_zcta(state, rand(zctas))
-        time.sleep(0.2)
+        time.sleep(0.5)
          
 
 if __name__ == "__main__":
