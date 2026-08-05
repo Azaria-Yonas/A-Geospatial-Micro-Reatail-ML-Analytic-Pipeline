@@ -52,6 +52,8 @@ async def initialize_table(zcta, state, func):
 
     
 def padd(zcta):
+    """When ZCTA are stored as an integer, those that start with 
+    a zero are shrinked. This functions padds them with zeros."""
     z = list(zcta) 
     for i in range(len(zcta)): 
         if len(str(z[i])) < 5 : 
