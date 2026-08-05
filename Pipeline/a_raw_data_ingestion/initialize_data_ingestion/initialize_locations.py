@@ -50,16 +50,14 @@ async def initialize_table(zcta, state, func):
             print(f"Inserted: {s}: {z} ({i+1}/{len(tasks)})")  
 
 
-
-def padd(zcta):
-    zcta = list(zcta)
-    for i in range(len(zcta)): 
-        if len(str(zcta[i])) < 5 : 
-            zcta[i] = "0"*(5-len(str(zcta[i]))) + str(zcta[i])
-
-    return zcta 
-
     
+def padd(zcta):
+    z = list(zcta) 
+    for i in range(len(zcta)): 
+        if len(str(z[i])) < 5 : 
+            z[i] = "0"*(5-len(str(z[i]))) + str(z[i])
+
+    return z 
 
 
 
