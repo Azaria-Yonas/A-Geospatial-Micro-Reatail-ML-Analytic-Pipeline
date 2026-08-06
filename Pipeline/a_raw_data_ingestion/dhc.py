@@ -27,17 +27,18 @@ def get_parameter(zcta):
     } 
 
 
-async def dhc_tasks(session, zcta):  
-    parameter = get_parameter(zcta) 
-    async with session.get(URL, params=parameter) as resp:
-        status = resp.status 
-        try: 
-            response = await resp.json() 
-            insert_request(zcta, "dhc", URL, "GET", body=parameter, status_code=status) 
-        except aiohttp.ContentTypeError:
-            response = await resp.text()
-            insert_request(zcta, "dhc", URL, "GET", body=parameter, status_code=status, error_message=response)
-        return zcta, response, status, "dhc"
+async def dhc_tasks(session, zcta, semaphore): 
+    async with semaphore: 
+        parameter = get_parameter(zcta) 
+        async with session.get(URL, params=parameter) as resp:
+            status = resp.status 
+            try: 
+                response = await resp.json() 
+                insert_request(zcta, "dhc", URL, "GET", body=parameter, status_code=status) 
+            except aiohttp.ContentTypeError:
+                response = await resp.text()
+                insert_request(zcta, "dhc", URL, "GET", body=parameter, status_code=status, error_message=response)
+            return zcta, response, status, "dhc"
 
 
  
