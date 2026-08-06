@@ -52,18 +52,19 @@ def get_parameter(zcta):
 
 
 
-async def acs_tasks (session, zcta):
-    url = get_url()
-    parameter = get_parameter(zcta)
-    async with session.get(url, params = parameter) as resp:
-        status = resp.status
-        try: 
-            response = await resp.json()        
-            insert_request(zcta, "acs", url, "GET", body=parameter, status_code=status)  
-        except aiohttp.ContentTypeError:
-            response = await resp.text() 
-            insert_request(zcta, "acs", url, "GET", body=parameter, status_code=status, error_message=response ) 
-        return zcta, response, status, "acs"
+async def acs_tasks (session, zcta, semaphore): 
+    async with semaphore:
+        url = get_url()
+        parameter = get_parameter(zcta)
+        async with session.get(url, params = parameter) as resp:
+            status = resp.status
+            try: 
+                response = await resp.json()        
+                insert_request(zcta, "acs", url, "GET", body=parameter, status_code=status)  
+            except aiohttp.ContentTypeError:
+                response = await resp.text() 
+                insert_request(zcta, "acs", url, "GET", body=parameter, status_code=status, error_message=response ) 
+            return zcta, response, status, "acs"
 
 
 
