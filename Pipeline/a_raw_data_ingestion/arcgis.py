@@ -43,18 +43,19 @@ def get_body(zcta):
 
 
 
-async def arcgis_tasks(session,zcta):
-    body = get_body(zcta)
+async def arcgis_tasks(session,zcta, semaphore): 
+    async with semaphore:
+        body = get_body(zcta)
 
-    async with session.post(URL, data=body) as resp:
-        status = resp.status
-        try:
-            response = await resp.json(content_type=None)        
-            insert_request(zcta, "arcgis", URL, "POST", body=body, status_code=status) 
-        except aiohttp.ContentTypeError:
-            response = await resp.text() 
-            insert_request(zcta, "arcgis", URL, "POST", body=body, status_code=status, error_message=response ) 
-        return zcta, response, status, "arcgis"
+        async with session.post(URL, data=body) as resp:
+            status = resp.status
+            try:
+                response = await resp.json(content_type=None)        
+                insert_request(zcta, "arcgis", URL, "POST", body=body, status_code=status) 
+            except aiohttp.ContentTypeError:
+                response = await resp.text() 
+                insert_request(zcta, "arcgis", URL, "POST", body=body, status_code=status, error_message=response ) 
+            return zcta, response, status, "arcgis"
 
 
 
