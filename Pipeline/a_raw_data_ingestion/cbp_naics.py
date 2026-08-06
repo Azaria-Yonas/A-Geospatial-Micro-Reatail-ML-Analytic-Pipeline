@@ -56,38 +56,40 @@ def get_naics_parameter(zcta, naics_code):
 
 
 
-async def fetch_size(session, url, zcta, label, size_code):
-    parameter = get_cbp_parameter(zcta, size_code)
-    async with session.get(url, params=parameter) as resp:
-        status = resp.status
-        
-        try:
-            response = await resp.json() 
-        except aiohttp.ContentTypeError: 
-            response = await resp.text()
-        return label, response, status, parameter
+async def fetch_size(session, url, zcta, label, size_code, semaphore): 
+    async with semaphore: 
+        parameter = get_cbp_parameter(zcta, size_code) 
+        async with session.get(url, params=parameter) as resp: 
+            status = resp.status
+            
+            try:
+                response = await resp.json() 
+            except aiohttp.ContentTypeError: 
+                response = await resp.text()
+            return label, response, status, parameter
 
 
 
-async def fetch_naics(session, url, zcta, label, naics_code): 
-    parameter = get_naics_parameter(zcta, naics_code) 
-    async with session.get(url, params=parameter) as resp:
-        status = resp.status
-        try:
-            response = await resp.json()
-        except aiohttp.ContentTypeError:
-            response = await resp.text()
-        return label, response, status, parameter
+async def fetch_naics(session, url, zcta, label, naics_code, semaphore): 
+    async with semaphore: 
+        parameter = get_naics_parameter(zcta, naics_code) 
+        async with session.get(url, params=parameter) as resp: 
+            status = resp.status
+            try: 
+                response = await resp.json()
+            except aiohttp.ContentTypeError:
+                response = await resp.text() 
+            return label, response, status, parameter 
 
 
 
-async def cbp_tasks(session, zcta):
+async def cbp_naics_tasks(session, zcta, semaphore):
     url = get_url()
     tasks = []
     for label, size_code in SIZES.items():
-        tasks.append(fetch_size(session, url, zcta, label, size_code))
+        tasks.append(fetch_size(session, url, zcta, label, size_code, semaphore)) 
     for label, naics_code in NAICS_SECTORS.items():
-        tasks.append(fetch_naics(session, url, zcta, label, naics_code))
+        tasks.append(fetch_naics(session, url, zcta, label, naics_code, semaphore)) 
     results_list = await asyncio.gather(*tasks)
     results = {}
     params_used = []
@@ -101,7 +103,7 @@ async def cbp_tasks(session, zcta):
             overall_status = status
 
     insert_request(zcta, "cbp", url, "GET", body=params_used, status_code=overall_status)  
-    return zcta, results, overall_status, "cbp"
+    return zcta, results, overall_status, "cbp-naics" 
 
 
 
