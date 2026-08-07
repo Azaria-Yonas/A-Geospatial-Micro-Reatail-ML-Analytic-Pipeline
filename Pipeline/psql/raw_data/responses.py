@@ -22,15 +22,16 @@ def get_response(api, state = None, lbound=None, hbound=None):
     with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
 
-            parameters = [] 
+            parameters = [api]
 
 
-            query = "SELECT zcta, response FROM raw_data.responses"
+            query = "SELECT zcta, response FROM raw_data.responses WHERE api = %s"
 
-            if state is not None: 
-                query += " WHERE state = %s AND api = %s"
-                parameters.extend((state, api))
+            if state is not None:
+                query += " AND state = %s"
+                parameters.append(state)
 
+            query += " ORDER BY zcta"
 
             if lbound is not None:
                 query += " OFFSET %s"
