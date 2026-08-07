@@ -57,6 +57,53 @@ def update_zcta(zcta, state, bbox):
 
 
 
+def get_coordinates(state = None, lbound=None, hbound=None):
+    """This function retrieves the ZCTAs along with its corresponding geographical bounding box"""
+
+    coordinates = []
+    with psycopg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
+        with conn.cursor() as curr:
+
+            conditions = []
+            parameters = [] 
+            
+
+
+            query = "SELECT zcta, state, ROW(down_lat, left_long, up_lat, right_long) AS bbox, ROW(center_lat, center_long, radius) AS center_and_radius FROM raw_data.locations "
+            if state is not None:
+                conditions.append("state = %s")
+                parameters.append(state)
+
+            if conditions:
+                query += " WHERE " + " AND ".join(conditions)
+
+            if lbound is not None:
+                query += " OFFSET %s"
+                parameters.append(lbound)
+
+            if hbound is not None:
+                query += " FETCH FIRST %s ROWS ONLY"
+                parameters.append(hbound)
+
+            curr.execute(query=query, params=parameters)
+                                        
+            coordinates = curr.fetchall()
+    return coordinates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
