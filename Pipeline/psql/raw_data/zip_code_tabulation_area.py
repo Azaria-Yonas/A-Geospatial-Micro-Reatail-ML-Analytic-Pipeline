@@ -16,6 +16,8 @@ def get_zcta (state: str | None = None, lbound: int | None = None, hbound: int |
     if state is not None:
         conditions.append("WHERE state = %s ")
         paramerters.append(state)
+
+    conditions.append("ORDER BY zcta")
     
     if lbound is not None:
         conditions.append("OFFSET %s")
