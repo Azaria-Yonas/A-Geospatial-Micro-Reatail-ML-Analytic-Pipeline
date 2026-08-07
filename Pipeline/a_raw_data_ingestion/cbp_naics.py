@@ -90,12 +90,17 @@ async def cbp_naics_tasks(session, zcta, semaphore):
         tasks.append(fetch_size(session, url, zcta, label, size_code, semaphore)) 
     for label, naics_code in NAICS_SECTORS.items():
         tasks.append(fetch_naics(session, url, zcta, label, naics_code, semaphore)) 
-    results_list = await asyncio.gather(*tasks)
+    results_list = await asyncio.gather(*tasks, return_exceptions=True) 
     results = {}
     params_used = []
     overall_status = 200
 
-    for label, response, status, parameter in results_list:
+    for item in results_list:
+        if isinstance(item, BaseException):
+            overall_status = 999 
+            continue
+
+        label, response, status, parameter = item
         results[label] = response
         params_used.append(parameter)
 
