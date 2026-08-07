@@ -1,3 +1,4 @@
+from psql.raw_data.locations import get_coordinates
 from psql.raw_data.responses import get_response
 from psql.data_parsing.arcgis_table import insert_variables
 
@@ -26,23 +27,23 @@ def parse_arcgis(zcta, state, r):
              ["attributes"]
         )
 
-        if int(attr["HasData"]) == 1:
-            return (zcta, int(attr["DPOP_CY"]), attr["URBNAME"])
-        else:
-            return (zcta, 0, None)
+        if to_int(attr["HasData"]) != 1:
+            attr = {}
 
     except Exception:
-        return (zcta, 0, None)
+        attr = {}
 
+    return (
+        zcta, state, to_int(attr.get("CHILD_CY")), 
+        to_int(attr.get("WORKAGE_CY")),to_int(attr.get("SENIOR_CY")), 
+        to_float(attr.get("CRMCYTOTC")),to_int(attr.get("DPOP_CY")),
+        to_int(attr.get("DPOPWRK_CY")), to_float(attr.get("DPOPDENSCY")), 
+        to_float(attr.get("MEDDI_CY")), to_float(attr.get("AVGDI_CY")),
+        to_float(attr.get("X11002_A")), to_float(attr.get("X14058_A")),
+        to_float(attr.get("MEDVAL_CY")),to_float(attr.get("AVGVAL_CY")), 
+        to_float(attr.get("MEDNW_CY")), to_float(attr.get("AVGNW_CY"))
+    )
 
-
-
-
-
-
-
-
-    
 
 
 
@@ -56,4 +57,8 @@ if __name__ == "__main__":
 
  
     for z, r in response: 
-        insert_variables(*parse_arcgis(z, r))
+        insert_variables(*parse_arcgis(z, state.get(z), r))
+
+
+
+
