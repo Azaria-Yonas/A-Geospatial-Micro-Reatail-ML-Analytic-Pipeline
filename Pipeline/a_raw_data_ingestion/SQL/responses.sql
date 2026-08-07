@@ -5,7 +5,7 @@ CREATE TABLE raw_data.responses(
     zcta VARCHAR(5) REFERENCES raw_data.zcta(zcta),
     state VARCHAR(30),
 
-    api VARCHAR(8) NOT NULL,
+    api VARCHAR(16) NOT NULL, 
     response JSONB,
     date_time TIMESTAMPTZ DEFAULT now()
 );
