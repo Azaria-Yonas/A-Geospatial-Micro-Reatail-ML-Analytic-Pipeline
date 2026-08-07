@@ -1,8 +1,5 @@
 import os
-from config import PSQL_KEY, PSQL_USER
+from config import DB_KEY, USERNAME, DATABASE 
 
-DATABASE = "ninthrun"  
 
-DB_KEY = PSQL_KEY       #    Modify this
-USERNAME = PSQL_USER    #    Modify this
-CITY = "seattle"
+

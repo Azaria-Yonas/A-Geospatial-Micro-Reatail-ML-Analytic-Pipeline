@@ -1,8 +1,8 @@
 CREATE TABLE raw_data.locations (
     index_num BIGSERIAL NOT NULL,
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    zcta INT UNIQUE REFERENCES raw_data.zcta(zcta),
-    city VARCHAR(30),
+    zcta VARCHAR(5) UNIQUE REFERENCES raw_data.zcta(zcta), 
+    state VARCHAR(3), 
     down_lat FLOAT,
     left_long FLOAT,
     up_lat FLOAT,
@@ -19,5 +19,5 @@ CREATE TABLE raw_data.locations (
 );
 
 
-CREATE INDEX locations_city_index ON raw_data.locations (city);
+CREATE INDEX locations_state_index ON raw_data.locations (state);
 
