@@ -19,7 +19,7 @@ def get_body(zcta):
         "studyAreas": json.dumps([{
             "sourceCountry": "US",
             "layer": "US.ZIP5", 
-            "ids": zcta 
+            "ids": [zcta] 
         }]),
         "analysisVariables": ",".join([
             "AgeDependency.CHILD_CY",        # 19. 2026 Child Population 
@@ -79,7 +79,8 @@ async def arcgis_tasks(session,zcta, semaphore):
 
 # async def func(coordinate):
 #     async with aiohttp.ClientSession() as session:
-#         tasks = [arcgis_tasks(session,  coordinate[0])]
+#         semaphore = asyncio.Semaphore(30)
+#         tasks = [arcgis_tasks(session,  coordinate[0], semaphore)]
 #         results = await asyncio.gather(*tasks)
 #         for z ,r, s, n in results:
 #             if s == 200:
