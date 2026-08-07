@@ -12,7 +12,7 @@ URL = "https://api.census.gov/data/2020/dec/dhc"
    
 def get_parameter(zcta):
     return {
-        "get": [ "P1_001N",    # 58. 2020 Total Population 
+        "get": ", ".join([ "P1_001N",    # 58. 2020 Total Population 
                 "PCT13_001N",  # 59. 2020 Household Population 
                 "P2_002N",     # 60. 2020 Urban Population
                 "P2_003N",     # 61. 2020 Rural Population 
@@ -21,7 +21,7 @@ def get_parameter(zcta):
                 "P12_002N",    # 64. 2020 Male Population 
                 "H3_003N",     # 65. 020 Vacant Housing Units   
                 "H5_002N",     # 66. 2020 Vacant Housing Units: For Rent
-            ],
+            ]),
         "for": f"zip code tabulation area:{zcta}",
         "key": CENSUS
     } 
