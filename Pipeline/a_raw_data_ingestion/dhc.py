@@ -12,7 +12,7 @@ URL = "https://api.census.gov/data/2020/dec/dhc"
    
 def get_parameter(zcta):
     return {
-        "get": ", ".join([  "P1_001N",    # 58. 2020 Total Population 
+        "get": ",".join([  "P1_001N",      # 58. 2020 Total Population
                             "PCT13_001N",  # 59. 2020 Household Population 
                             "P2_002N",     # 60. 2020 Urban Population
                             "P2_003N",     # 61. 2020 Rural Population 
