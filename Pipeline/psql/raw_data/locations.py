@@ -77,6 +77,8 @@ def get_coordinates(state = None, lbound=None, hbound=None):
             if conditions:
                 query += " WHERE " + " AND ".join(conditions)
 
+            query += " ORDER BY zcta"
+
             if lbound is not None:
                 query += " OFFSET %s"
                 parameters.append(lbound)
