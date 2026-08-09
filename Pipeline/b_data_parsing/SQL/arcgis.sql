@@ -1,4 +1,5 @@
-CREATE TABLE processed_data.arcgis_variables(
+CREATE SCHEMA IF NOT EXISTS parsed_data; 
+CREATE TABLE parsed_data.arcgis_variables(
     index_num BIGSERIAL NOT NULL,
 
 
