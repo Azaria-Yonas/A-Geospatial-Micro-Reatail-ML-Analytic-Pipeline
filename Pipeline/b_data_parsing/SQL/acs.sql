@@ -1,4 +1,5 @@
-CREATE TABLE processed_data.acs_variables (
+CREATE SCHEMA IF NOT EXISTS parsed_data;
+CREATE TABLE parsed_data.acs_variables (
     index_num BIGSERIAL NOT NULL,
     zcta VARCHAR(5) PRIMARY KEY REFERENCES raw_data.zcta(zcta),
     state VARCHAR(3),

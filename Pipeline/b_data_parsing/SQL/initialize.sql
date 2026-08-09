@@ -1,1 +1,0 @@
-CREATE SCHEMA parsed_data;

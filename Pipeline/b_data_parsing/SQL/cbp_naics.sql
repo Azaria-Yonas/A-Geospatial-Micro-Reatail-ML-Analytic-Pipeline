@@ -1,7 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS parsed_data;
 
-
-
-CREATE TABLE processed_data.cbp_naics_variables ( 
+ 
+CREATE TABLE parsed_data.cbp_naics_variables ( 
 
     index_num BIGSERIAL NOT NULL,
     zcta VARCHAR(5) PRIMARY KEY REFERENCES raw_data.zcta(zcta),

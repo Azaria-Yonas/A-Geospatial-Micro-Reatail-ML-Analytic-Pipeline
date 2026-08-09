@@ -1,5 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS parsed_data;
 
-CREATE TABLE processed_data.dhc_variables ( 
+CREATE TABLE parsed_data.dhc_variables ( 
 
     index_num BIGSERIAL NOT NULL,
     zcta VARCHAR(5) PRIMARY KEY REFERENCES raw_data.zcta(zcta),
