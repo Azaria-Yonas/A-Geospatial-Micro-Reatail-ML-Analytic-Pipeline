@@ -37,6 +37,7 @@ def get_body(zcta):
             "homevalue.AVGVAL_CY",           # 31. 2026 Average Home Value 
             "networth.MEDNW_CY",             # 32. 2026 Median Net Worth 
             "networth.AVGNW_CY",             # 33. 2026 Average Net Worth 
+            "SpendingTotal.X1001_X",         # 34. 2026 Total Consumer Spending
         ]),
         "returnGeometry": "false"
     }

@@ -13,6 +13,7 @@ def insert_variables(
     avg_college_tuition, avg_value_of_stocks,
     median_home_value, average_home_value,
     median_net_worth, average_net_worth,
+    total_consumer_spending,
 ):
     with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
@@ -25,18 +26,10 @@ def insert_variables(
                     median_disposable_income,average_disposable_income,
                     avg_college_tuition, avg_value_of_stocks,
                     median_home_value, average_home_value,
-                    median_net_worth, average_net_worth
+                    median_net_worth, average_net_worth,
+                    total_consumer_spending
                 )
-                VALUES (
-                    %s,%s,
-                    %s,%s,%s,
-                    %s,
-                    %s,%s,%s,
-                    %s,%s,
-                    %s,%s,
-                    %s,%s,
-                    %s,%s
-                );
+                VALUES (%s,%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
             """,
             (
                 zcta, state, child_population,
@@ -46,7 +39,8 @@ def insert_variables(
                 median_disposable_income,average_disposable_income,
                 avg_college_tuition, avg_value_of_stocks,
                 median_home_value, average_home_value,
-                median_net_worth, average_net_worth
+                median_net_worth, average_net_worth,
+                total_consumer_spending
             ))
 
 

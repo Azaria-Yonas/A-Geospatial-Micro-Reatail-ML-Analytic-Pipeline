@@ -20,7 +20,9 @@ CREATE TABLE processed_data.arcgis_variables(
     median_home_value DOUBLE PRECISION, 
     average_home_value DOUBLE PRECISION, 
     median_net_worth DOUBLE PRECISION,
-    average_net_worth DOUBLE PRECISION 
+    average_net_worth DOUBLE PRECISION, 
+    total_consumer_spending DOUBLE PRECISION 
+    
 
 );
 
