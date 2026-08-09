@@ -1,1 +1,1 @@
-CREATE SCHEMA processed_data;
+CREATE SCHEMA parsed_data;
