@@ -34,14 +34,14 @@ def parse_arcgis(zcta, state, r):
         attr = {}
 
     return (
-        zcta, state, to_int(attr.get("CHILD_CY")), 
-        to_int(attr.get("WORKAGE_CY")),to_int(attr.get("SENIOR_CY")), 
-        to_float(attr.get("CRMCYTOTC")),to_int(attr.get("DPOP_CY")),
-        to_int(attr.get("DPOPWRK_CY")), to_float(attr.get("DPOPDENSCY")), 
-        to_float(attr.get("MEDDI_CY")), to_float(attr.get("AVGDI_CY")),
-        to_float(attr.get("X11002_A")), to_float(attr.get("X14058_A")),
-        to_float(attr.get("MEDVAL_CY")),to_float(attr.get("AVGVAL_CY")), 
-        to_float(attr.get("MEDNW_CY")), to_float(attr.get("AVGNW_CY"))
+        zcta,state,to_int(attr.get("CHILD_CY")),to_int(attr.get("WORKAGE_CY")),
+        to_int(attr.get("SENIOR_CY")), to_float(attr.get("CRMCYTOTC")),
+        to_int(attr.get("DPOP_CY")), to_int(attr.get("DPOPWRK_CY")), 
+        to_float(attr.get("DPOPDENSCY")), to_float(attr.get("MEDDI_CY")),
+        to_float(attr.get("AVGDI_CY")), to_float(attr.get("X11002_A")), 
+        to_float(attr.get("X14058_A")), to_float(attr.get("MEDVAL_CY")),
+        to_float(attr.get("AVGVAL_CY")), to_float(attr.get("MEDNW_CY")), 
+        to_float(attr.get("AVGNW_CY")), to_float(attr.get("X1001_X")) 
     )
 
 
