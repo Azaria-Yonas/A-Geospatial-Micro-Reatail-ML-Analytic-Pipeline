@@ -27,8 +27,7 @@ CREATE TABLE parsed_data.acs_variables (
 );
 
 
-
-CREATE INDEX acs_state_zcta ON processed_data.acs_variables (state, zcta); 
+CREATE INDEX acs_state_zcta ON parsed_data.acs_variables (state, zcta); 
 
 
 
