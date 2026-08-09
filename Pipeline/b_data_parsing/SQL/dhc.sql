@@ -12,8 +12,8 @@ CREATE TABLE parsed_data.dhc_variables (
     household_population INTEGER,
     urban_population INTEGER,
     rural_population INTEGER,
-    median_male_age NUMERIC(4,1),
-    median_female_age NUMERIC(4,1),
+    median_male_age DOUBLE PRECISION, 
+    median_female_age DOUBLE PRECISION,
     male_population INTEGER,
     vacant_housing_units INTEGER,
     vacant_housing_for_rent INTEGER 
