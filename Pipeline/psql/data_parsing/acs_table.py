@@ -14,7 +14,7 @@ def insert_variables(
     with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
             curr.execute("""
-                INSERT INTO processed_data.acs_variables (
+                INSERT INTO  parsed_data.acs_variables (
                     zcta, state, total_population, median_household_income,
                     per_capita_income, poverty_population,bachelors_degree, 
                     employed_population, housing_units, median_gross_rent, 
@@ -49,7 +49,7 @@ def get_variables(state = None, lbound = None, hbound = None, *args):
 
             parameters = []
 
-            query = f"SELECT {cols} FROM processed_data.acs_variables" 
+            query = f"SELECT {cols} FROM parsed_data.acs_variables" 
 
 
 
