@@ -18,7 +18,7 @@ def insert_variables(
     with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
             curr.execute("""
-                INSERT INTO processed_data.arcgis_variables (
+                INSERT INTO parsed_data.arcgis_variables (
                     zcta, state, child_population,
                     working_population, senior_population,
                     total_crime_index, daytime_population,
@@ -56,7 +56,7 @@ def get_variables(state = None, lbound = None, hbound = None, *args):
             parameters = []
 
 
-            query = f"SELECT {cols} FROM processed_data.arcgis_variables"
+            query = f"SELECT {cols} FROM parsed_data.arcgis_variables"
 
             if state is not None:
                 query += " WHERE state = %s"
