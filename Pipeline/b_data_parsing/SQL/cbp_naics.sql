@@ -36,7 +36,7 @@ CREATE TABLE parsed_data.cbp_naics_variables (
 
 
 
-CREATE INDEX cbp_naics_state_zcta ON processed_data.cbp_naics_variables (state, zcta);
+CREATE INDEX cbp_naics_state_zcta ON parsed_data.cbp_naics_variables (state, zcta);
 
 
 

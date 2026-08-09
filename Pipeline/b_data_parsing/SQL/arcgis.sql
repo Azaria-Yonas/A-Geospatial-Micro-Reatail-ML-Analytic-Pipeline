@@ -30,7 +30,7 @@ CREATE TABLE parsed_data.arcgis_variables(
 
 
 
-CREATE INDEX arcgis_state_zcta ON processed_data.arcgis_variables (state, zcta); 
+CREATE INDEX arcgis_state_zcta ON parsed_data.arcgis_variables (state, zcta); 
 
 
 

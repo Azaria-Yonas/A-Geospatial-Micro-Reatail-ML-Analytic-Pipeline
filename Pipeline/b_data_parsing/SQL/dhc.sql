@@ -18,7 +18,7 @@ CREATE TABLE parsed_data.dhc_variables (
     vacant_housing_units INTEGER,
     vacant_housing_for_rent INTEGER 
 );
-CREATE INDEX dhc_state_zcta ON processed_data.dhc_variables (state, zcta);
+CREATE INDEX dhc_state_zcta ON parsed_data.dhc_variables (state, zcta);
 
 
 
