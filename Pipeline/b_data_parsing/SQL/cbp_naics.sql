@@ -1,7 +1,7 @@
+CREATE SCHEMA IF NOT EXISTS parsed_data;
 
-
-
-CREATE TABLE processed_data.cbp_naics_variables ( 
+ 
+CREATE TABLE parsed_data.cbp_naics_variables ( 
 
     index_num BIGSERIAL NOT NULL,
     zcta VARCHAR(5) PRIMARY KEY REFERENCES raw_data.zcta(zcta),
@@ -36,7 +36,7 @@ CREATE TABLE processed_data.cbp_naics_variables (
 
 
 
-CREATE INDEX cbp_naics_state_zcta ON processed_data.cbp_naics_variables (state, zcta);
+CREATE INDEX cbp_naics_state_zcta ON parsed_data.cbp_naics_variables (state, zcta);
 
 
 

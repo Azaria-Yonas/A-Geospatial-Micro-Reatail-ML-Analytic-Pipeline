@@ -15,20 +15,14 @@ def insert_variables(
     with pg.connect(f"dbname={DATABASE} user={USERNAME} password={DB_KEY}") as conn:
         with conn.cursor() as curr:
             curr.execute("""
-                INSERT INTO processed_data.dhc_variables (
+                INSERT INTO parsed_data.dhc_variables (
                     zcta, state, total_population_2020,
                     household_population, urban_population,
                     rural_population, median_male_age,
                     median_female_age, male_population,
                     vacant_housing_units, vacant_housing_for_rent
                 )
-                VALUES (
-                    %s,%s,
-                    %s,%s,
-                    %s,%s,
-                    %s,%s,%s,
-                    %s,%s
-                );
+                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);
                 """,(
                     zcta, state, total_population_2020,
                     household_population, urban_population,
@@ -50,7 +44,7 @@ def get_variables(state = None, lbound = None, hbound = None, *args):
         with conn.cursor() as curr:
 
             parameters = []
-            query = f"SELECT {cols} FROM processed_data.dhc_variables"
+            query = f"SELECT {cols} FROM parsed_data.dhc_variables"
 
 
             if state is not None:

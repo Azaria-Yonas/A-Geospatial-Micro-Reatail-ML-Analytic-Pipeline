@@ -1,1 +1,0 @@
-CREATE SCHEMA processed_data;
