@@ -10,7 +10,7 @@ def to_int(x):
     try:
         return int(x)
     except:
-        return 0
+        return None 
 
 
 
@@ -21,13 +21,13 @@ def parse_cbp_naics(zcta, state, r):
             vals = r[key][1]
             return to_int(vals[0]), to_int(vals[1])
         except Exception:
-            return 0, 0
+            return None, None
 
     def get_estab(key):
         try:
             return to_int(r[key][1][0])
         except Exception:
-            return 0
+            return None
 
 
 
