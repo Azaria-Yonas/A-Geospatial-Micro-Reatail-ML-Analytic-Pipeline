@@ -7,14 +7,14 @@ def to_int(x):
     try:
         return int(x)
     except:
-        return 0
+        return None
 
 
 def to_float(x):
     try:
         return float(x)
     except:
-        return 0.0
+        return None
 
 
 

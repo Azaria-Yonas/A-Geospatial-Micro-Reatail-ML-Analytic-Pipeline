@@ -14,7 +14,7 @@ def to_int(x):
     try:
         return int(x)
     except:
-        return 0
+        return None
 
 
 
@@ -29,7 +29,7 @@ def parse_acs(zcta, state, r):
         try: 
             return to_int(vals[i])  
         except Exception:
-            return 0
+            return  None
 
     return (
         zcta,state, 
