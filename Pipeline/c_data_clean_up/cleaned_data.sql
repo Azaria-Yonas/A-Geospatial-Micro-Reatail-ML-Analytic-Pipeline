@@ -1,0 +1,3 @@
+CREATE SCHEMA IF NOT EXISTS cleaned_data;
+CREATE TABLE IF NOT EXISTS joined_clean;
+
